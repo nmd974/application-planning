@@ -23,4 +23,7 @@ class Exam extends Model
     public function activites(){
         return $this->hasMany(Activitie::class);
     }
+    public function promotions(){
+        return $this->hasMany(Promotion::class);
+    }
 }

@@ -15,6 +15,9 @@ class CreateExamPromotionsTable extends Migration
     {
         Schema::create('exam_promotions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('exam_id')->nullable();
+            $table->foreignId('promotion_id')->nullable();
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }
