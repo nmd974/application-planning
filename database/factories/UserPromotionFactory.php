@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\Promotion;
 use App\Models\User_promotion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,8 +23,10 @@ class UserPromotionFactory extends Factory
      */
     public function definition()
     {
+
         return [
-            //
+            'user_id' => User::all()->random()->id,
+            'promotion_id' => Promotion::all()->random()->id,
         ];
     }
 }
