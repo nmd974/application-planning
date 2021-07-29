@@ -15,7 +15,7 @@ class CreateUserPromotionsTable extends Migration
     {
         Schema::create('user_promotions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('promotion_id')->constrained()->nullable();
+            $table->foreignId('promotion_id')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->boolean('archived')->default(false);
             $table->timestamps();

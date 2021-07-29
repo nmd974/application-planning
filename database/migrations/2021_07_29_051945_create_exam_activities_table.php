@@ -18,7 +18,7 @@ class CreateExamActivitiesTable extends Migration
             $table->integer('duration');
             $table->integer('order');
             $table->foreignId('exam_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('activitie_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('activitie_id')->nullable();
             $table->timestamps();
         });
     }
