@@ -12,10 +12,11 @@ class UserPromotionResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+
+
     public function toArray($request)
     {
-        return [
-            'user' => $this->user
-        ];
+        return new UserResource($this->user);
     }
 }
