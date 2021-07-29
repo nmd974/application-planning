@@ -9,6 +9,12 @@ class User_promotion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'promotion_id',
+        'user_id',
+        'archived',
+    ];
+
     public function user()
     {
         return $this->BelongsTo('App\Models\User');
