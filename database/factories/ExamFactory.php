@@ -22,7 +22,7 @@ class ExamFactory extends Factory
     public function definition()
     {
         return [
-            'label' => $this->faker->text($maxNbChars = 20),
+            'label' => $this->faker->word(4, true),
             'date_start' => date("Y-m-d H:i:s", time()),
             'archived' => false,
         ];
