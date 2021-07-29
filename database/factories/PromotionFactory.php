@@ -22,7 +22,7 @@ class PromotionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'label' => "CDA ".$this->faker->name(),
         ];
     }
 }
