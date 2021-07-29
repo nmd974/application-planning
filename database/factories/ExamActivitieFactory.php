@@ -15,7 +15,7 @@ class ExamActivitieFactory extends Factory
      * @var string
      */
     protected $model = Exam_activitie::class;
-
+    private static $order = 1;
     /**
      * Define the model's default state.
      *
@@ -33,10 +33,9 @@ class ExamActivitieFactory extends Factory
         //     }
 
         // }
-        $cpt = 0;
         return [
             "duration" => $this->faker()->numberBetween($min = 5, $max = 120),
-            "order" => $cpt += 1,
+            "order" => self::$order += 1,
             "activitie_id" => Activitie::all()->random()->id,
             "exam_id" => Exam::find(1),
         ];
