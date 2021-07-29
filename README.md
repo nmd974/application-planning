@@ -18,11 +18,11 @@ Utilisateur|Affecter une activité à une personne|Visualiser les activités sur
 
 # TASKS
 
-![sparkles](https://trello.com/b/eKQXhHHl/app-planning)
+<a href="https://trello.com/b/eKQXhHHl/app-planning">Lien vers canvas</a>
 
 # MCD
 
-![sparkles](ressources/documentation/MCD-V5.png)
+![sparkles](./resources/documentation/MCD-V5.png)
 
 # MPD
 
@@ -37,7 +37,7 @@ exams_activities: id, #exam_id, #activity_id, duration, order, archived;
 
 
 # Wireframes
-![sparkles](https://www.canva.com/design/DAEle0t-GTM/TqeNjjJlqDOhRNJOl3Hj-w/view?website#1)
+<a href="https://www.canva.com/design/DAEle0t-GTM/TqeNjjJlqDOhRNJOl3Hj-w/view?website#1">Lien vers canvas</a>
 
 
 
