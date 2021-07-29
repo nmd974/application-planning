@@ -8,54 +8,36 @@ L'application sera à l'usage de personnes qui disposent de plannings communs ou
 
 En tant que|Je veux|Afin de|Taches|Priorite
 :---|:---|:---|:---|:---
-✔Utilisateur|Créer, modifier, desactiver une activité|Gérer les activités possibles|Modele de la table Activite
+Utilisateur|Créer, modifier, desactiver une activité|Gérer les activités possibles|Modele de la table Activite
 ||||CRUD sur la table
 ||||Sécuriser le formulaire
-✔Utilisateur|Créer, modifier, desactiver un utilisateur|Gérer les utilsateurs|Modele de la table utilisateur
+Utilisateur|Créer, modifier, desactiver un utilisateur|Gérer les utilsateurs|Modele de la table utilisateur
 ||||CRUD sur la table
 ||||Sécuriser le formulaire
-✔Utilisateur|Affecter une activité à une personne|Visualiser les activités sur une date|Fonction d'ajout de l'id de l'activité à une heure et date
+Utilisateur|Affecter une activité à une personne|Visualiser les activités sur une date|Fonction d'ajout de l'id de l'activité à une heure et date
 
 # TASKS
 
-- [ ] Créer la table utilisateur et sa vue d'administration
-- [ ] Créer la table role et sa vue d'administration
-- [ ] Créer la table activites et sa vue d'administration
-- [ ] Créer la table promotion et sa vue d'administration
-- [ ] Créer la table d'association user_activity et sa vue d'administration
-- [ ] Créer le dossier VUE JS pour l'affichage du planning
-- [ ] Générer un code pour accéder au planning de la personne connectée
-- [ ] Générer un QR code pour la tache précédente
-- [ ] Générer une documentation pour l'utilisation de l'application
+<a href="https://trello.com/b/eKQXhHHl/app-planning">Lien vers canvas</a>
 
 # MCD
 
-![sparkles](ressources/documentation/MCD-V3.png)
+![sparkles](./resources/documentation/MCD-V5.png)
 
 # MPD
 
-roles: id, libelle;
-utilisateurs: id, nom, prenom, #role_id;
-posseder: id, #id_utilisateur, #id_activites, libelle, jour;
-activites: id, libelle, debut, fin, etat;
+roles: id, label, archived;
+promotions: id, label, archived;
+users: id, last_name, first_name, birthday, email, archived, #role_id;
+users_promotions : id, #promotion_id, #user_id, archived;
+exams: id, label, date_start, archived;
+exams_promotions : id, #exam_id, #promotion_id, archived;
+activites: id, label, archived;
+exams_activities: id, #exam_id, #activity_id, duration, order, archived;
+
 
 # Wireframes
-
-## Roles
-
-![sparkles](resources/documentation/wireframe_roles.png)
-
-## Utilisateurs
-
-![sparkles](resources/documentation/wireframe_users.png)
-
-## Activites
-
-![sparkles](resources/documentation/wireframe_activites.png)
-
-## Affectations
-
-![sparkles](resources/documentation/wireframe_affectation.png)
+<a href="https://www.canva.com/design/DAEle0t-GTM/TqeNjjJlqDOhRNJOl3Hj-w/view?website#1">Lien vers canvas</a>
 
 
 
