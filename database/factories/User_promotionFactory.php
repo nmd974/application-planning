@@ -7,7 +7,7 @@ use App\Models\Promotion;
 use App\Models\User_promotion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserPromotionFactory extends Factory
+class User_promotionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.

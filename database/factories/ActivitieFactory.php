@@ -23,7 +23,7 @@ class ActivitieFactory extends Factory
     {
         return [
             //
-            "label" => $this->faker()->word(5, true)
+            "label" => $this->faker->word(5, true)
         ];
     }
 }

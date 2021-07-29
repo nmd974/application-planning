@@ -7,7 +7,7 @@ use App\Models\Exam;
 use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ExamPromotionFactory extends Factory
+class Exam_promotionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.

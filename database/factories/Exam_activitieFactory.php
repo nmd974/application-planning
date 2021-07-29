@@ -7,7 +7,7 @@ use App\Models\Exam_activitie;
 use App\Models\Exam;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ExamActivitieFactory extends Factory
+class Exam_activitieFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -25,7 +25,7 @@ class ExamActivitieFactory extends Factory
     {
 
         return [
-            "duration" => $this->faker()->numberBetween($min = 5, $max = 120),
+            "duration" => $this->faker->numberBetween($min = 5, $max = 120),
             "order" => self::$order += 1,
             "activitie_id" => Activitie::all()->random()->id,
             "exam_id" => Exam::find(1),
