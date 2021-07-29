@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Exam;
+use App\Models\User;
+use App\Models\User_promotion;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Promotion extends Model
 {
@@ -21,4 +24,8 @@ class Promotion extends Model
     public function exams(){
         return $this->hasMany(Exam::class);
     }
+    public function users() {
+        return $this->hasMany(User_promotion::class);
+    }
+
 }

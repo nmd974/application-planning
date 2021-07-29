@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\UserPromotionResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PromotionResource extends JsonResource
@@ -14,6 +15,11 @@ class PromotionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+
+        return [
+            'id'    => $this->id,
+            'label' => $this->label,
+            'users' => UserPromotionResource::collection($this->users)
+        ];
     }
 }
