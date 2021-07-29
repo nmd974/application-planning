@@ -15,6 +15,9 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            $table->string('label');
+            $table->dateTitme('date_start');
+            $table->boolean('archived');
             $table->timestamps();
         });
     }

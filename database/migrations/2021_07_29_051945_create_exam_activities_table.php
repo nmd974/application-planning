@@ -15,6 +15,10 @@ class CreateExamActivitiesTable extends Migration
     {
         Schema::create('exam_activities', function (Blueprint $table) {
             $table->id();
+            $table->integer('duration');
+            $table->integer('order');
+            $table->foreignId('exam_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('activitie_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
