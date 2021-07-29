@@ -17,7 +17,7 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->string('label');
             $table->dateTime('date_start');
-            $table->boolean('archived');
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }

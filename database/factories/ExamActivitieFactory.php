@@ -23,16 +23,7 @@ class ExamActivitieFactory extends Factory
      */
     public function definition()
     {
-        // $exams = Exam::all();
-        // foreach($exams as $e){
-        //     for($i =1; $i < 5;$i++){
-        //         $activity = new Activitie();
-        //         $activity->duration = $this->faker()->numberBetween($min = 5, $max = 120);
-        //         $activity->order = $i;
-        //         $activity->save();
-        //     }
 
-        // }
         return [
             "duration" => $this->faker()->numberBetween($min = 5, $max = 120),
             "order" => self::$order += 1,

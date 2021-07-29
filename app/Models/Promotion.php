@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Promotion extends Model
 {
     use HasFactory;
+        /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'label',
+        'archived'
+    ];
+
+    public function exams(){
+        return $this->hasMany(Exam::class);
+    }
 }

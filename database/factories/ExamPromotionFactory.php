@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Exam_promotion;
+use App\Models\Exam;
+use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExamPromotionFactory extends Factory
@@ -23,6 +25,8 @@ class ExamPromotionFactory extends Factory
     {
         return [
             //
+            "exam_id" => Exam::all()->random()->id,
+            "promotion_id" => Promotion::all()->random()->id
         ];
     }
 }
