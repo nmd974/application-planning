@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Exam;
+use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Exam_promotion extends Model
 {
@@ -21,9 +23,10 @@ class Exam_promotion extends Model
     ];
 
     public function promotion(){
-        return $this->belongsToMany(Promotion::class);
+        return $this->belongsTo(Promotion::class);
     }
-    public function exams(){
-        return $this->belongsToMany(Exam::class);
+    public function exams()
+    {
+        return $this->BelongsTo(Exam::class, 'exam_id', 'id');
     }
 }

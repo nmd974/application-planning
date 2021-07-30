@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Exam_activitie;
+use App\Models\Exam_promotion;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Exam extends Model
 {
@@ -20,10 +22,10 @@ class Exam extends Model
         'archived'
     ];
 
-    public function activites(){
-        return $this->hasMany(Activitie::class);
+    public function activities(){
+        return $this->hasMany(Exam_activitie::class);
     }
     public function promotions(){
-        return $this->hasMany(Promotion::class);
+        return $this->hasMany(Exam_promotion::class);
     }
 }
