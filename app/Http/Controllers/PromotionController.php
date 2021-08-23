@@ -52,6 +52,14 @@ class PromotionController extends Controller
         ->with(['users' => $dataPromotion->users, 'promotion_id' => $id]);
     }
 
+    public function dataPromotionExam($id)
+    {
+        $dataPromotion = Promotion::find($id);
+        return
+        view("exams.examData")
+        ->with(['promotion' => $dataPromotion]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

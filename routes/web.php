@@ -23,6 +23,7 @@ Route::get('/{vue}', [PromotionController::class, 'index'])->name("getPromotions
 Route::get("/promotion/{id}", [PromotionController::class, 'dataPromotion'])->name("usersByPromotion");
 Route::post('/promotion/create', [PromotionController::class, 'store'])->name("promotion.store");
 Route::get('/promotion/archived/{id}', [PromotionController::class, 'destroy']);
+Route::get('/promotion/{id}/exams', [PromotionController::class, 'dataPromotionExam']);
 
 Route::post("/create/eleve", [UserController::class, 'store'])->name("users.store");
 

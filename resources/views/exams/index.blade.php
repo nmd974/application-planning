@@ -13,18 +13,18 @@ Gestion de la promotion
         <button class="btn btn-outline-success" type="submit">Rechercher</button>
         <input type="hidden" name="_token" value="{{ Session::token() }}">
     </form>
-    @include('users.modal.create')
+    {{-- @include('users.modal.create') --}}
     </div>
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/promotion/{{$promotion_id}}">Liste des élèves</a>
+            <a class="nav-link active" aria-current="page" href="/promotion/{{$promotion->id}}">Liste des élèves</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/promotion/{{$promotion_id}}/exams">Liste des examens</a>
+            <a class="nav-link" href="/promotion/{{$promotion->id}}/exams">Liste des examens</a>
         </li>
     </ul>
     <div class="container-fluid">
-        @yield('users')
+        @yield('exams')
     </div>
 @endsection

@@ -11,9 +11,11 @@
                 <a type="button" class="btn btn-outline-secondary"  href="/promotion/{{ $promotion->id }}">
                     <i class="fa fa-eye" aria-hidden="true"></i>
                 </a>
-                <a type="button" class="btn btn-dark"  href="/promotion/archived/{{ $promotion->id }}">
-                    <i class="fa fa-folder" aria-hidden="true"></i>
-                </a>
+                @if(!$promotion->archived)
+                    <a type="button" class="btn btn-dark"  href="/promotion/archived/{{ $promotion->id }}">
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                    </a>
+                @endif
             </div>
         </div>
     </div>
