@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserPromotionController;
 use App\Models\User;
 
 /*
@@ -22,5 +23,8 @@ Route::get('/{vue}', [PromotionController::class, 'index'])->name("getPromotions
 Route::get("/promotion/{id}", [PromotionController::class, 'dataPromotion'])->name("usersByPromotion");
 Route::post('/promotion/create', [PromotionController::class, 'store'])->name("promotion.store");
 
-Route::post("/create/eleve", [UserController::class, 'store'])->name("users.store");
+Route::post("/eleve/create", [UserController::class, 'store'])->name("users.store");
+Route::post("/eleve/update/{id}", [UserController::class, 'update'])->name("users.update");
+
+Route::delete("/eleve/delete/{id}", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy");
 

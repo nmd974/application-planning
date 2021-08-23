@@ -41,7 +41,6 @@ class UserController extends Controller
 
         if($validator->fails()){
             return $validator->errors();
-            // return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Elève ajouté avec succès"]);
         }
 
         $user = new User();
@@ -91,9 +90,35 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(),
+        [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|max:255|email',
+            'birthday' => 'required|date',
+        ]);
+
+        if($validator->fails()){
+            return $validator->errors();
+        }
+
+        $user = User::find($id);
+        $user->first_name = $request['first_name'];
+        $user->last_name = $request['last_name'];
+        $user->email = $request['email'];
+        $user->birthday = $request['birthday'];
+
+        if($user->update()){
+            $user_promotion = new UserPromotionController();
+            $user_promotion->store($user->id, $request['promotion_id']);
+            if($user_promotion){
+                return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Elève modifié avec succès"]);
+            }
+        }
+        return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageError' => "Echec lors de la modification de l'élève"]);
     }
 
     /**
@@ -102,8 +127,15 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         //
+        $user = User::find($id);
+        $user->archived = true;
+
+        if($user->update()){
+            return redirect()->route('users.index')->with(['messageSuccess' => "Utilisateur supprimé avec succès"]);
+        }
+        return redirect()->route('users.index')->with(['messageError' => "Echec lors de la suppression de l'utilisateur"]);
     }
 }

@@ -14,6 +14,8 @@
             <tbody>
                 @if (count($users))
                     @foreach ($users as $user)
+                    @include('users.modal.update')
+                    @include('users.modal.delete')
                     <tr>
                         <td class="align-middle">{{ucfirst($user->first_name) }} {{ucfirst($user->last_name) }}</td>
                         <td class="align-middle">{{ucfirst($user->email) }}</td>

@@ -44,6 +44,7 @@ class PromotionController extends Controller
     public function dataPromotion($id)
     {
         $dataPromotion = Promotion::find($id);
+
         return
         view("users.userData")
         ->with(['users' => $dataPromotion->users, 'promotion_id' => $id]);

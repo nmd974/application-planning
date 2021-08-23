@@ -88,8 +88,13 @@ class UserPromotionController extends Controller
      * @param  \App\Models\User_promotion  $user_promotion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User_promotion $user_promotion)
+    public function destroy($id)
     {
         //
+dd($id);
+        $user_promotion = User_promotion::find($id);
+        $user_promotion->archived = true;
+        $user_promotion->delete();
+
     }
 }
