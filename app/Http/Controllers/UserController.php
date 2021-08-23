@@ -49,7 +49,7 @@ class UserController extends Controller
         $user->email = $request['email'];
         $user->birthday = $request['birthday'];
         $user->role_id = 1;
-        $user->archived = false;
+        // $user->archived = false;
 
         if($user->save()){
             $user_promotion = new UserPromotionController();

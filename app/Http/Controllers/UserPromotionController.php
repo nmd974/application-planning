@@ -39,7 +39,7 @@ class UserPromotionController extends Controller
         $user_promotion = new User_promotion();
         $user_promotion->promotion_id = $promotion_id;
         $user_promotion->user_id = $user_id;
-        $user_promotion->archived = false;
+        // $user_promotion->archived = false;
 
         if($user_promotion->save()){
             return true;

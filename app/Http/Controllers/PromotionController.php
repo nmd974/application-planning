@@ -50,7 +50,7 @@ class PromotionController extends Controller
 
         return
         view("users.userData")
-        ->with(['users' => $dataPromotion->users, 'promotion_id' => $id]);
+        ->with(['users' => $dataPromotion->users, 'promotion_id' => $id, "label" => $dataPromotion->label]);
     }
 
     public function dataPromotionExam($id)
@@ -58,7 +58,7 @@ class PromotionController extends Controller
         $dataPromotion = Promotion::find($id);
         return
         view("exams.examData")
-        ->with(['promotion' => $dataPromotion]);
+        ->with(['promotion' => $dataPromotion, 'promotion_id' => $id, "label" => $dataPromotion->label]);
     }
 
     /**

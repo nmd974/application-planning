@@ -19,7 +19,7 @@ class Exam_activitiesCollection extends JsonResource
            'id'         => $this->id,
            'duration'   => $this->duration,
            'order'      => $this->order,
-           'activitie'  => new ActivitieCollection($this->activitie),
+           'activitie'  => new ActivitieCollection($this->activities),
         ];
     }
 }

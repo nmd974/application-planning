@@ -21,10 +21,10 @@ class Exam_activitie extends Model
         'archived'
     ];
 
-    public function activitie(){
-        return $this->belongsTo(Activitie::class);
+    public function activities(){
+        return $this->hasMany(Activitie::class);
     }
     public function exams(){
-        return $this->belongsTo(Exam::class);
+        return $this->hasMany(Exam::class);
     }
 }

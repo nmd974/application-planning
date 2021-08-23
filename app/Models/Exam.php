@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Exam_activitie;
+use App\Models\Activitie;
 use App\Models\Exam_promotion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,7 +23,7 @@ class Exam extends Model
     ];
 
     public function activities(){
-        return $this->hasMany(Exam_activitie::class);
+        return $this->belongsToMany(Activitie::class, "exam_activities", "exam_id", "activitie_id");
     }
     public function promotions(){
         return $this->hasMany(Exam_promotion::class);
