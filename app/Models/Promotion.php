@@ -23,10 +23,9 @@ class Promotion extends Model
     ];
 
     public function exams(){
-        return $this->hasMany(Exam_promotion::class);
+        return $this->belongsToMany(Exam::class,"exam_promotions", "promotion_id", "exam_id", "id", "id");
     }
     public function users() {
-        return $this->hasMany(User_promotion::class);
+        return $this->belongsToMany(User::class,"user_promotions", "promotion_id", "user_id", "id", "id");
     }
-
 }

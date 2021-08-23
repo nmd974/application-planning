@@ -15,9 +15,37 @@ class PromotionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($vue = "promoEnCours")
     {
-        return PromotionCollection::collection(Promotion::all());
+        if ($vue === "promoArchived") {
+            return $this->listPromotionArchived();
+        } else {
+            return $this->listPromotionEnCours();
+        }
+    }
+
+    public function  listPromotionEnCours()
+    {
+        $promotionsNotArchived = Promotion::where("archived", 0)->get();
+        return
+            view("promotions.promotionEnCours")
+            ->with('promotions', $promotionsNotArchived)
+            ->with('title', "Liste des Promotions En cours");
+    }
+
+    public function listPromotionArchived()
+    {
+        $promotionArchived = Promotion::where("archived", 1)->get();
+        return
+            view("promotions.promotionEnCours")
+            ->with('promotions', $promotionArchived)
+            ->with('title', "Liste des Promotions Archived");
+    }
+
+    public function dataPromotion($id)
+    {
+        $dataPromotion = Promotion::find($id);
+        dd($dataPromotion->users);
     }
 
     /**

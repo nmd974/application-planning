@@ -14,8 +14,7 @@ use App\Http\Controllers\PromotionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PromotionController::class, 'index']);
+Route::get('/{vue}', [PromotionController::class, 'index']);
 
-Route::get("/promotions", [PromotionController::class, 'index']);
+Route::get("/promotion/{id}", [PromotionController::class, 'dataPromotion']);
