@@ -1,5 +1,11 @@
 @extends('layouts.layouts')
-{{ $title = "Liste des élèves"}}
+@section('title')
+Gestion des promotions
+@endsection
+
+@section('title-section')
+Gestion de la promotion
+@endsection
 @section('content')
     <form class="d-flex" method="post">
         @csrf
