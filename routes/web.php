@@ -18,3 +18,4 @@ Route::get('/', [PromotionController::class, 'index']);
 Route::get('/{vue}', [PromotionController::class, 'index']);
 
 Route::get("/promotion/{id}", [PromotionController::class, 'dataPromotion']);
+Route::post('/promotion/create', [PromotionController::class, 'store'])->name("promotion.store");
