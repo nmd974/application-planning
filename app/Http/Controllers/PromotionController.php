@@ -9,6 +9,8 @@ use App\Http\Resources\PromotionResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PromotionCollection;
 
+
+
 class PromotionController extends Controller
 {
     /**
@@ -25,12 +27,13 @@ class PromotionController extends Controller
         }
     }
 
-    public function  listPromotionData()
+    public function  listPromotionData($msg = null)
     {
         $promotionsNotArchived = Promotion::where("archived", 0)->get();
         return
             view("promotions.promotionData")
-            ->with('promotions', $promotionsNotArchived);
+            ->with('promotions', $promotionsNotArchived)
+            ->with(['messageSuccess' => $msg]);
     }
 
     public function listPromotionArchived()
@@ -48,6 +51,14 @@ class PromotionController extends Controller
         return
         view("users.userData")
         ->with(['users' => $dataPromotion->users, 'promotion_id' => $id]);
+    }
+
+    public function dataPromotionExam($id)
+    {
+        $dataPromotion = Promotion::find($id);
+        return
+        view("exams.examData")
+        ->with(['promotion' => $dataPromotion]);
     }
 
     /**
@@ -76,10 +87,16 @@ class PromotionController extends Controller
         );
 
         if ($validator->fails()) {
-            return $this->listPromotionData()->with('messageError', 'test');
+            return $this->listPromotionData()->with(['messageError', 'Error création promo']);
         }
 
+        $promotion = New Promotion ;
 
+        $promotion->label = $request->label;
+
+        if($promotion->save()){
+            return $this->listPromotionData()->with(['messageSuccess' => "Promo créé"]);
+        }
     }
 
     /**
@@ -122,8 +139,12 @@ class PromotionController extends Controller
      * @param  \App\Models\Promotion  $promotion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Promotion $promotion)
+    public function destroy($promotion)
     {
-        //
+        $promotionArchived = Promotion::find($promotion);
+        $promotionArchived->archived = true;
+        $promotionArchived->save();
+
+        return $this->listPromotionData('promo archivée');
     }
 }
