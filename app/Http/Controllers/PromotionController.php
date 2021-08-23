@@ -29,8 +29,7 @@ class PromotionController extends Controller
         $promotionsNotArchived = Promotion::where("archived", 0)->get();
         return
             view("promotions.promotionData")
-            ->with('promotions', $promotionsNotArchived)
-            ->with('title', "Liste des Promotions En cours");
+            ->with('promotions', $promotionsNotArchived);
     }
 
     public function listPromotionArchived()
@@ -38,8 +37,7 @@ class PromotionController extends Controller
         $promotionArchived = Promotion::where("archived", 1)->get();
         return
             view("promotions.promotionData")
-            ->with('promotions', $promotionArchived)
-            ->with('title', "Liste des Promotions Archived");
+            ->with('promotions', $promotionArchived);
     }
 
     public function dataPromotion($id)

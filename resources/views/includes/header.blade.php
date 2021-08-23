@@ -11,17 +11,17 @@
         <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
         <i class="fa fa-users me-3" aria-hidden="true"></i>
-        <div>Utilisateurs</div>
+        <div>Promotion</div>
       </a>
       <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
         <i class="fa fa-cogs me-3" aria-hidden="true"></i>
-        <div>Rôles</div>
+        <div>test</div>
       </a>
       <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
         <i class="fa fa-cogs me-3" aria-hidden="true"></i>
-        <div>Activités</div>
+        <div>Deconnecter</div>
       </a>
     </div>
   </div>
