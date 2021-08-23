@@ -20,15 +20,15 @@ class PromotionController extends Controller
         if ($vue === "promoArchived") {
             return $this->listPromotionArchived();
         } else {
-            return $this->listPromotionEnCours();
+            return $this->listPromotionData();
         }
     }
 
-    public function  listPromotionEnCours()
+    public function  listPromotionData()
     {
         $promotionsNotArchived = Promotion::where("archived", 0)->get();
         return
-            view("promotions.promotionEnCours")
+            view("promotions.promotionData")
             ->with('promotions', $promotionsNotArchived)
             ->with('title', "Liste des Promotions En cours");
     }
@@ -37,7 +37,7 @@ class PromotionController extends Controller
     {
         $promotionArchived = Promotion::where("archived", 1)->get();
         return
-            view("promotions.promotionEnCours")
+            view("promotions.promotionData")
             ->with('promotions', $promotionArchived)
             ->with('title', "Liste des Promotions Archived");
     }
