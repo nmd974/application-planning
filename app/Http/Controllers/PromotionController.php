@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PromotionCollection;
-use App\Http\Resources\PromotionResource;
 use App\Models\Promotion;
-use Illuminate\Http\Request;
 use PhpParser\JsonDecoder;
+use Illuminate\Http\Request;
+use App\Http\Resources\PromotionResource;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\PromotionCollection;
 
 class PromotionController extends Controller
 {
@@ -66,7 +67,18 @@ class PromotionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'label' => 'required|string|max:100',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return $this->listPromotionData()->with('messageError', 'test');
+        }
+
+
     }
 
     /**
