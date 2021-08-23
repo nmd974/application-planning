@@ -14,7 +14,7 @@
             <a class="nav-link active" aria-current="page" href="{{ route("getPromotions", "promoEnCours") }}">Promotion En Cours</a>
         </li>
         <li class="nav-item">
-            <a href="{{ route("getPromotions", "promoArchived") }}">Promotion Archived</a>
+            <a class="nav-link" href="{{ route("getPromotions", "promoArchived") }}">Promotion Archived</a>
         </li>
     </ul>
     <div class="container-fluid">

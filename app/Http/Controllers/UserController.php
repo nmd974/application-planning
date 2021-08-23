@@ -112,11 +112,7 @@ class UserController extends Controller
         $user->birthday = $request['birthday'];
 
         if($user->update()){
-            $user_promotion = new UserPromotionController();
-            $user_promotion->store($user->id, $request['promotion_id']);
-            if($user_promotion){
-                return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Elève modifié avec succès"]);
-            }
+            return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Elève modifié avec succès"]);
         }
         return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageError' => "Echec lors de la modification de l'élève"]);
     }
@@ -130,12 +126,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $user = User::find($id);
-        $user->archived = true;
+        // $user = User::find($id);
+        // $user->archived = true;
 
-        if($user->update()){
-            return redirect()->route('users.index')->with(['messageSuccess' => "Utilisateur supprimé avec succès"]);
-        }
-        return redirect()->route('users.index')->with(['messageError' => "Echec lors de la suppression de l'utilisateur"]);
+        // if($user->update()){
+        //     return redirect()->route('users.index')->with(['messageSuccess' => "Utilisateur supprimé avec succès"]);
+        // }
+        // return redirect()->route('users.index')->with(['messageError' => "Echec lors de la suppression de l'utilisateur"]);
     }
 }

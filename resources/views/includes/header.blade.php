@@ -10,13 +10,13 @@
       <div class="list-group list-group-flush">
         <a href="{{ route("getPromotions", "promoEnCours") }}"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
-        <i class="fa fa-users me-3" aria-hidden="true"></i>
+        <i class="fa fa-graduation-cap me-3" aria-hidden="true"></i>
         <div>Promotions</div>
       </a>
       <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
-        <i class="fa fa-cogs me-3" aria-hidden="true"></i>
-        <div>test</div>
+        <i class="fa fa-users me-3" aria-hidden="true"></i>
+        <div>Utilisateurs</div>
       </a>
       <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">

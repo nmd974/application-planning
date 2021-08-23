@@ -5,8 +5,9 @@
                 <h5 class="modal-title" id="delet_user_{{$user->id}}Label">Suppression d'un utilisateur</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="get" action="{{ route('user_promotions.destroy', $user->pivot_user_id) }}">
-                {{-- @method('DELETE') --}}
+            {{-- {{dd($user)}} --}}
+            <form method="post" action="{{ route('user_promotions.destroy',[$user->getOriginal('pivot_promotion_id'), $user->getOriginal("pivot_user_id")]) }}">
+                @method('PATCH')
                 @csrf
 
                 <div class="modal-body">

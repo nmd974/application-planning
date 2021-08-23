@@ -27,7 +27,7 @@ Route::get('/promotion/archived/{id}', [PromotionController::class, 'destroy']);
 Route::get('/promotion/{id}/exams', [PromotionController::class, 'dataPromotionExam']);
 
 Route::post("/eleve/create", [UserController::class, 'store'])->name("users.store");
-Route::post("/eleve/update/{id}", [UserController::class, 'update'])->name("users.update");
+Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("users.update");
 
-Route::delete("/eleve/delete/{id}", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy");
+Route::patch("/eleve/{user_id}/promotion/{promotion_id}/delete", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy");
 

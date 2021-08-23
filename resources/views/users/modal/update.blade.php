@@ -22,7 +22,7 @@
                         <label>Email<span class="text-danger">*</span></label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" required name="date_birth" value="{{$user->date_birth}}">
+                        <input type="date" class="form-control" required name="birthday" value="{{$user->birthday}}">
                         <label>Date de naissance<span class="text-danger">*</span></label>
                     </div>
                     <input type="hidden" name="id" value="{{$user->id}}">
