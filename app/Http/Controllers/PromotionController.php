@@ -9,6 +9,8 @@ use App\Http\Resources\PromotionResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PromotionCollection;
 
+
+
 class PromotionController extends Controller
 {
     /**
@@ -44,7 +46,9 @@ class PromotionController extends Controller
     public function dataPromotion($id)
     {
         $dataPromotion = Promotion::find($id);
-        dd($dataPromotion->users);
+        return
+        view("users.userData")
+        ->with(['users' => $dataPromotion->users, 'promotion_id' => $id]);
     }
 
     /**
@@ -76,7 +80,13 @@ class PromotionController extends Controller
             return $this->listPromotionData()->with('messageError', 'test');
         }
 
+        $promotion = New Promotion ;
 
+        $promotion->label = $request->label;
+
+        if($promotion->save()){
+            return $this->listPromotionData()->with('messageSuccess', 'Promotion Créé');
+        }
     }
 
     /**

@@ -8,10 +8,10 @@
     @include('includes.toast-msg')
     <div class="border-right position-fixed" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
-        <a href="#"
+        <a href="{{ route("getPromotions", "promoEnCours") }}"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
         <i class="fa fa-users me-3" aria-hidden="true"></i>
-        <div>Promotion</div>
+        <div>Promotions</div>
       </a>
       <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
