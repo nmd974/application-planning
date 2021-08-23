@@ -9,6 +9,8 @@ use App\Http\Resources\PromotionResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PromotionCollection;
 
+
+
 class PromotionController extends Controller
 {
     /**
@@ -76,7 +78,13 @@ class PromotionController extends Controller
             return $this->listPromotionData()->with('messageError', 'test');
         }
 
+        $promotion = New Promotion ;
 
+        $promotion->label = $request->label;
+
+        if($promotion->save()){
+            return $this->listPromotionData()->with('messageSuccess', 'Promotion Créé');
+        }
     }
 
     /**

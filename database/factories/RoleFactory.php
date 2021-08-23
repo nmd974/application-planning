@@ -14,6 +14,8 @@ class RoleFactory extends Factory
      */
     protected $model = Role::class;
 
+    public $counter = 0;
+
     /**
      * Define the model's default state.
      *
@@ -21,8 +23,15 @@ class RoleFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'label' => $this->faker->word(),
-        ];
+        $roles = ['élève', 'jury', 'admin'];
+        $data = ['label' => $roles[$this->getCounter()]];
+        $this->setCounter();
+        return $data;
+    }
+    public function getCounter(){
+        return $this->counter;
+    }
+    public function setCounter(){
+        return $this->counter += 1;
     }
 }
