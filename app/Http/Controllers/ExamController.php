@@ -14,7 +14,9 @@ class ExamController extends Controller
      */
     public function index()
     {
-        //
+        $exams = Exam::All() ;
+
+        return view('exams.index')->with('exams',$exams );
     }
 
     /**
