@@ -49,14 +49,14 @@ class ExamActivitieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($activitie_id, $timestamp, $order, $exam_id)
+    public function store($activitie_id, $duration, $order, $exam_id)
     {
         //
         $exam_activitie = new Exam_activitie();
         $exam_activitie->exam_id = $exam_id;
         $exam_activitie->activitie_id = $activitie_id;
         $exam_activitie->order = $order;
-        $exam_activitie->duration = $timestamp;
+        $exam_activitie->duration = $duration;
         if($exam_activitie->save()){
             return true;
         }

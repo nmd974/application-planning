@@ -55,14 +55,13 @@ class ActivitieController extends Controller
 
         $activitie = new Activitie();
         $activitie->label = $request['label'];
-        // dd();
-        $timestamp = mktime(substr($request["duration"],0,2),substr($request["duration"],3,2),substr($request["exam_date"],0,2),substr($request["exam_date"],3,2),substr($request["exam_date"],6,2));
-
+        $hours = intval(substr($request["duration"],0,2)) * 60;
+        $duration = $hours + intval(substr($request["duration"],3,2));
         $order = $request['order'];
 
         if($activitie->save()){
             $exam_activitie = new ExamActivitieController();
-            $exam_activitie->store($activitie->id, $timestamp, $order, $exam_id);
+            $exam_activitie->store($activitie->id, $duration, $order, $exam_id);
             if($exam_activitie){
                 return redirect()->route('getActivitiesByExam', $exam_id)->with(['messageSuccess' => "Activité ajoutée avec succès"]);
             }
@@ -102,6 +101,8 @@ class ActivitieController extends Controller
     public function update(Request $request, Activitie $activitie)
     {
         //
+
+
     }
 
     /**
