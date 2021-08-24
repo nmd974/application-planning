@@ -14,8 +14,8 @@
             <tbody>
                 @if (count($activities))
                     @foreach ($activities as $activitie)
-                    {{-- @include('activities.modal.update')
-                    @include('activities.modal.delete') --}}
+                    @include('activities.modal.update')
+                    @include('activities.modal.delete')
                         @if (!$activitie->pivot->archived)
                             <tr>
                                 <td class="align-middle">{{ucfirst($activitie->label) }}</td>

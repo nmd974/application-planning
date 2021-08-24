@@ -98,9 +98,34 @@ class ActivitieController extends Controller
      * @param  \App\Models\Activitie  $activitie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Activitie $activitie)
+    public function update(Request $request, $exam_id, $activitie_id)
     {
         //
+        $validator = Validator::make($request->all(),
+        [
+            'label' => 'required|max:255',
+            'duration' => 'required',
+            'order' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $validator->errors();
+        }
+
+        $activitie = Activitie::find($activitie_id);
+        $activitie->label = $request['label'];
+        $hours = intval(substr($request["duration"],0,2)) * 60;
+        $duration = $hours + intval(substr($request["duration"],3,2));
+        $order = $request['order'];
+
+        if($activitie->save()){
+            $exam_activitie = new ExamActivitieController();
+            $exam_activitie->update($activitie->id, $duration, $order, $exam_id);
+            if($exam_activitie){
+                return redirect()->route('getActivitiesByExam', $exam_id)->with(['messageSuccess' => "Activité modifiée avec succès"]);
+            }
+        }
+        return redirect()->route('getActivitiesByExam', $request['promotion_id'])->with(['messageError' => "Echec lors de la modification de l'activité"]);
 
 
     }

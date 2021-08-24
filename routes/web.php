@@ -8,7 +8,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivitieController;
 use App\Http\Controllers\UserPromotionController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +40,4 @@ Route::patch("/exam/update/{id}", [ExamController::class, 'update'])->name("upda
 Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index'])->name("getActivitiesByExam");
 Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie");
 Route::patch("/exam/{exam_id}/activities/{activitie_id}/update", [ActivitieController::class, 'update'])->name("updateExamActivitie");
+Route::patch("/exam/{exam_id}/activities/{activitie_id}/delete", [ExamActivitieController::class, 'destroy'])->name("deleteActivityByExam");

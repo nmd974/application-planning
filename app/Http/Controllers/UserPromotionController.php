@@ -94,7 +94,6 @@ class UserPromotionController extends Controller
         $user_promotion = User_promotion::where(["user_id" => $user_id, "promotion_id" => $promotion_id])->get()->first();
         $user_promotion->archived = true;
 
-        // dd($user_promotion->first());
         if($user_promotion->update()){
             return redirect()->route('usersByPromotion', $promotion_id)->with(['messageSuccess' => "Elève supprimé de la promotion"]);
         }

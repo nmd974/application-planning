@@ -23,7 +23,7 @@ class Exam extends Model
     ];
 
     public function activities(){
-        return ($this->belongsToMany(Activitie::class,"exam_activities", "exam_id", "activitie_id", "id", "id"))->withPivot('duration','order');
+        return ($this->belongsToMany(Activitie::class,"exam_activities", "exam_id", "activitie_id", "id", "id"))->withPivot('duration','order', 'archived');
     }
     public function promotion(){
        return ($this->belongsToMany(Promotion::class,"exam_promotions", "exam_id", "promotion_id", "id", "id"));
