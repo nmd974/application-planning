@@ -33,9 +33,18 @@ class ExamPromotionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($exam_id, $promotion_id)
     {
         //
+        $exam_promotion = new Exam_promotion();
+        $exam_promotion->promotion_id = $promotion_id;
+        $exam_promotion->exam_id = $exam_id;
+        // $user_promotion->archived = false;
+
+        if($exam_promotion->save()){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -78,8 +87,16 @@ class ExamPromotionController extends Controller
      * @param  \App\Models\Exam_promotion  $exam_promotion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exam_promotion $exam_promotion)
+    public function destroy($promotion_id,$exam_id)
     {
-        //
+
+        $exam_promotion = Exam_promotion::where(["exam_id" => $exam_id, "promotion_id" => $promotion_id])->get()->first();
+        $exam_promotion->archived = true;
+
+        // dd($user_promotion->first());
+        if($exam_promotion->update()){
+            return redirect()->route('examsByPromotion', $promotion_id)->with(['messageSuccess' => "Examen supprimé de la promotion"]);
+        }
+        return redirect()->route('examsByPromotion', $promotion_id)->with(['messageSuccess' => "Echec de la suppression de l'examen de cette promotion"]);
     }
 }

@@ -1,10 +1,10 @@
 @extends('layouts.layouts')
 @section('title')
-Gestion des promotions
+Gestion des examens
 @endsection
 
 @section('title-section')
-Gestion des promotions
+Déroulé de l'examen {{ $exam->label }}
 @endsection
 @section('content')
     <form class="d-flex" method="post">
@@ -13,18 +13,10 @@ Gestion des promotions
         <button class="btn btn-outline-success" type="submit">Rechercher</button>
         <input type="hidden" name="_token" value="{{ Session::token() }}">
     </form>
-    @include('promotions.modal.create')
+    @include('activities.modal.create')
     </div>
 
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route("getPromotions", "promoEnCours") }}">Promotion En Cours</a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route("getPromotions", "promoArchived") }}">Promotion Archived</a>
-        </li>
-    </ul>
     <div class="container-fluid">
-        @yield('promotion')
+        @yield('activities')
     </div>
 @endsection
