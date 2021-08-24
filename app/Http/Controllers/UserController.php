@@ -112,6 +112,7 @@ class UserController extends Controller
         $user->last_name = $request['last_name'];
         $user->email = $request['email'];
         $user->birthday = $request['birthday'];
+        $user->token = Hash::make("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
 
         if($user->update()){
             return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Elève modifié avec succès"]);
