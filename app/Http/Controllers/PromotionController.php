@@ -47,7 +47,7 @@ class PromotionController extends Controller
     public function dataPromotion($id)
     {
         $dataPromotion = Promotion::find($id);
-
+// dd($dataPromotion->users);
         return
         view("users.userData")
         ->with(['users' => $dataPromotion->users, 'promotion_id' => $id, "label" => $dataPromotion->label]);
@@ -56,7 +56,7 @@ class PromotionController extends Controller
     public function dataPromotionExam($id)
     {
         $dataPromotion = Promotion::find($id);
-        // dd($dataPromotion);
+        // dd($dataPromotion->exams);
         return
         view("exams.examData")
         ->with(['promotion' => $dataPromotion, 'promotion_id' => $id, "label" => $dataPromotion->label]);
