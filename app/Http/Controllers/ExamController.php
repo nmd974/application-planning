@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\ExamPromotionController;
 
@@ -107,10 +108,11 @@ class ExamController extends Controller
         if($validator->fails()){
             return $validator->errors();
         }
-
+        $date = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
         $exam = Exam::find($id);
         $exam->label = $request['label'];
-        $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));;
+        $exam->token = Hash::make("".$request['label'].",".$date."");
+        $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
 
         if($exam->update()){
             return redirect()->route('examsByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Examen modifié avec succès"]);

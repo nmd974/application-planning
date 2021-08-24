@@ -26,6 +26,6 @@ class Promotion extends Model
         return $this->belongsToMany(Exam::class,"exam_promotions", "promotion_id", "exam_id", "id", "id");
     }
     public function users() {
-        return $this->belongsToMany(User::class,"user_promotions", "promotion_id", "user_id", "id", "id");
+        return $this->belongsToMany(User::class,"user_promotions", "promotion_id", "user_id", "id", "id")->orderBy('last_name');
     }
 }

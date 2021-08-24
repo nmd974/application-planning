@@ -17,12 +17,14 @@ class UserCollection extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'        => $this->id,
-            'last_name' => $this->last_name,
-            'first_name'=> $this->first_name,
-            'birthday'  => $this->birthday,
-            'token'     => $this->token,
-            'email'     => $this->email,
+            'id'            => $this['eleve']->id,
+            'last_name'     => $this['eleve']->last_name,
+            'first_name'    => $this['eleve']->first_name,
+            'birthday'      => $this['eleve']->birthday,
+            'token'         => $this['eleve']->token,
+            'email'         => $this['eleve']->email,
+            'heurePassage'  => $this['heureDePassage'],
+            'date_exam'     => $this['date_exam']
         ];
     }
 }

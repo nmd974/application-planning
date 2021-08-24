@@ -16,12 +16,9 @@ class ApiEleveExamController extends Controller
         return $eleves;
     }
 
-    function listPromoNotarchived($exam_id)
+    function listPromoNotarchived($token)
     {
-        $exam = Exam::find($exam_id);
-
-
-
+        $exam = Exam::where('token', $token)->first();
         return new JuryDataCollection($exam);
     }
 }

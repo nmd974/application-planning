@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Exam;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExamFactory extends Factory
@@ -21,9 +22,12 @@ class ExamFactory extends Factory
      */
     public function definition()
     {
+        $label = $this->faker->word(4, true);
+        $date = date("Y-m-d H:i:s", time());
         return [
-            'label' => $this->faker->word(4, true),
-            'date_start' => date("Y-m-d H:i:s", time()),
+            'label' => $label,
+            'date_start' => $date,
+            'token'     =>  Hash::make("".$label.",".$date.""),
             'archived' => false,
         ];
     }

@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/eleve/list/{id}", [ApiEleveExamController::class, "listPromoNotarchived"]);
+Route::get("/jury/exam/{id}", [ApiEleveExamController::class, "listPromoNotarchived"]);
 
 
 
