@@ -8,6 +8,7 @@ use App\Models\User_promotion;
 use App\Http\Controllers\UserPromotionController;
 use App\Http\Controllers\PromotionController;
 use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -50,6 +51,7 @@ class UserController extends Controller
         $user->email = $request['email'];
         $user->birthday = $request['birthday'];
         $user->role_id = 1;
+        $user->token = Hash::make("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
         $user->archived = false;
 
         if($user->save()){

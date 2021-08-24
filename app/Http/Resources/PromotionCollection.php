@@ -19,8 +19,6 @@ class PromotionCollection extends JsonResource
         return [
             'id'        => $this->id,
             'promo'     => $this->label,
-            'student'   => User_promotionCollection::collection($this->users),
-            'exam'      => Exam_promotionCollection::collection($this->exams),
         ];
 
     }

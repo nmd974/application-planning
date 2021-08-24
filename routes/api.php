@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\PromotionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\ApiEleveExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get("/eleve/list/{id}", [ApiEleveExamController::class, "listPromoNotarchived"]);
+
 
 

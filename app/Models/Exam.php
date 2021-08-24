@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Activitie;
+use App\Models\Promotion;
 use App\Models\Exam_activitie;
 use App\Models\Exam_promotion;
 use Illuminate\Database\Eloquent\Model;
@@ -23,9 +25,9 @@ class Exam extends Model
     ];
 
     public function activities(){
-        return $this->hasMany(Exam_activitie::class);
+        return ($this->belongsToMany(Activitie::class,"exam_activities", "exam_id", "activitie_id", "id", "id"))->withPivot('duration','order');
     }
-    public function promotions(){
-        return $this->hasMany(Exam_promotion::class);
+    public function promotion(){
+       return ($this->belongsToMany(Promotion::class,"exam_promotions", "exam_id", "promotion_id", "id", "id"));
     }
 }
