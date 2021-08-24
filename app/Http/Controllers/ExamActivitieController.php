@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activitie;
+use App\Models\Exam;
 use App\Models\Exam_activitie;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,23 @@ class ExamActivitieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($exam_id)
     {
         //
+        // $exam_activities = Exam_activitie::where("exam_id", $exam_id)->orderBy('order', 'ASC')->get();
+        // dd($exam_activities);
+        // $exam = Exam::find($exam_id);
+        // $activitie = Activitie::find($exam_activities->activitie_id);
+        // return
+        // view("activities.activitiesData")
+        // ->with(['activities' => $exam_activities, 'activitiy' => $activitie, "exam" => $exam]);
+
+        $exam_activities = Exam::find($exam_id);
+        // dd($exam_activities->activities);
+        $exam = Exam::find($exam_id);
+        return
+        view("activities.activitiesData")
+        ->with(['activities' => $exam_activities->activities, "exam" => $exam]);
     }
 
     /**
@@ -33,9 +49,18 @@ class ExamActivitieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($activitie_id, $timestamp, $order, $exam_id)
     {
         //
+        $exam_activitie = new Exam_activitie();
+        $exam_activitie->exam_id = $exam_id;
+        $exam_activitie->activitie_id = $activitie_id;
+        $exam_activitie->order = $order;
+        $exam_activitie->duration = $timestamp;
+        if($exam_activitie->save()){
+            return true;
+        }
+        return false;
     }
 
     /**

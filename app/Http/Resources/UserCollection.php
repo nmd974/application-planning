@@ -21,7 +21,7 @@ class UserCollection extends JsonResource
             'last_name' => $this->last_name,
             'first_name'=> $this->first_name,
             'birthday'  => $this->birthday,
-            'role'      => new RoleCollection($this->role),
+            'token'     => $this->token,
             'email'     => $this->email,
         ];
     }

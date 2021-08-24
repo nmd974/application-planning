@@ -39,7 +39,7 @@ class UserPromotionController extends Controller
         $user_promotion = new User_promotion();
         $user_promotion->promotion_id = $promotion_id;
         $user_promotion->user_id = $user_id;
-        $user_promotion->archived = false;
+        // $user_promotion->archived = false;
 
         if($user_promotion->save()){
             return true;
@@ -88,8 +88,16 @@ class UserPromotionController extends Controller
      * @param  \App\Models\User_promotion  $user_promotion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User_promotion $user_promotion)
+    public function destroy($promotion_id,$user_id)
     {
-        //
+
+        $user_promotion = User_promotion::where(["user_id" => $user_id, "promotion_id" => $promotion_id])->get()->first();
+        $user_promotion->archived = true;
+
+        // dd($user_promotion->first());
+        if($user_promotion->update()){
+            return redirect()->route('usersByPromotion', $promotion_id)->with(['messageSuccess' => "Elève supprimé de la promotion"]);
+        }
+        return redirect()->route('usersByPromotion', $promotion_id)->with(['messageSuccess' => "Echec de la suppression de l'élève de cette promotion"]);
     }
 }

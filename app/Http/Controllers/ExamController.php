@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\ExamPromotionController;
 
 class ExamController extends Controller
 {
@@ -38,6 +40,30 @@ class ExamController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validator = Validator::make($request->all(),
+        [
+            'label' => 'required|max:255',
+            'start_date' => 'required|date',
+            'start_time' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $validator->errors();
+        }
+
+        $exam = new Exam();
+        $exam->label = $request['label'];
+        $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));;
+
+        if($exam->save()){
+            $exam_promotion = new ExamPromotionController();
+            $exam_promotion->store($exam->id, $request['promotion_id']);
+            if($exam_promotion){
+                return redirect()->route('examsByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Examen ajouté avec succès"]);
+            }
+        }
+        return redirect()->route('examsByPromotion', $request['promotion_id'])->with(['messageError' => "Echec lors de l'ajout de l'examen"]);
     }
 
     /**
@@ -69,9 +95,29 @@ class ExamController extends Controller
      * @param  \App\Models\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exam $exam)
+    public function update(Request $request, $id)
     {
         //
+
+        $validator = Validator::make($request->all(),
+        [
+            'label' => 'required|max:255',
+            'start_date' => 'required|date',
+            'start_time' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $validator->errors();
+        }
+
+        $exam = Exam::find($id);
+        $exam->label = $request['label'];
+        $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));;
+
+        if($exam->update()){
+            return redirect()->route('examsByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Examen modifié avec succès"]);
+        }
+        return redirect()->route('examsByPromotion', $request['promotion_id'])->with(['messageError' => "Echec lors de la modification de l'examen"]);
     }
 
     /**

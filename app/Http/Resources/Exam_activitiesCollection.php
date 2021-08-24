@@ -16,10 +16,10 @@ class Exam_activitiesCollection extends JsonResource
     public function toArray($request)
     {
         return [
-           'id'         => $this->id,
-           'duration'   => $this->duration,
-           'order'      => $this->order,
-           'activitie'  => new ActivitieCollection($this->activitie),
+            'id' => $this->id,
+            'exam' => $this->label,
+            'duration' => $this->pivot->duration,
+            'order'=> $this->pivot->order,
         ];
     }
 }
