@@ -49,14 +49,14 @@ class ExamActivitieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($activitie_id, $timestamp, $order, $exam_id)
+    public function store($activitie_id, $duration, $order, $exam_id)
     {
         //
         $exam_activitie = new Exam_activitie();
         $exam_activitie->exam_id = $exam_id;
         $exam_activitie->activitie_id = $activitie_id;
         $exam_activitie->order = $order;
-        $exam_activitie->duration = $timestamp;
+        $exam_activitie->duration = $duration;
         if($exam_activitie->save()){
             return true;
         }
@@ -92,9 +92,18 @@ class ExamActivitieController extends Controller
      * @param  \App\Models\Exam_activitie  $exam_activitie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exam_activitie $exam_activitie)
+    public function update($activitie_id, $duration, $order, $exam_id)
     {
         //
+        $exam_activitie = Exam_activitie::where(["activitie_id" => $activitie_id, "exam_id" => $exam_id])->get()->first();
+        $exam_activitie->exam_id = $exam_id;
+        $exam_activitie->activitie_id = $activitie_id;
+        $exam_activitie->order = $order;
+        $exam_activitie->duration = $duration;
+        if($exam_activitie->save()){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -103,8 +112,16 @@ class ExamActivitieController extends Controller
      * @param  \App\Models\Exam_activitie  $exam_activitie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exam_activitie $exam_activitie)
+    public function destroy($exam_id, $activitie_id)
     {
         //
+        $exam_activitie = Exam_activitie::where(["exam_id" => $exam_id, "activitie_id" => $activitie_id])->get()->first();
+        $exam_activitie->archived = true;
+
+        if($exam_activitie->update()){
+            return redirect()->route('getActivitiesByExam', $exam_id)->with(['messageSuccess' => "Activité supprimée avec succès"]);
+        }
+        return redirect()->route('getActivitiesByExam', $exam_id)->with(['messageError' => "Echec lors de la suppression de l'activité"]);
+
     }
 }

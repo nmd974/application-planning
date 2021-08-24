@@ -13,31 +13,36 @@
             </thead>
             <tbody>
                 @if (count($promotion->exams))
+
                     @foreach ($promotion->exams as $exam)
-                    @include('exams.modal.update')
-                    @include('exams.modal.delete')
-                    <tr>
-                        <td class="align-middle">{{ucfirst($exam->label) }}</td>
-                        <td class="align-middle">{{date("Y-m-d", strtotime($exam->date_start)) }}</td>
-                        <td class="align-middle">{{date("H:i", strtotime($exam->date_start)) }}</td>
-                        <td class="d-flex justify-content-around flex-wrap">
-                            <button type="button" class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#{{"edit_exam_" . $exam->id}}">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
+                    {{-- {{dd($exam->getOriginal('pivot_archived'))}} --}}
+                        @if (!$exam->getOriginal('pivot_archived'))
+                            @include('exams.modal.update')
+                            @include('exams.modal.delete')
+                            <tr>
+                                <td class="align-middle">{{ucfirst($exam->label) }}</td>
+                                <td class="align-middle">{{date("Y-m-d", strtotime($exam->date_start)) }}</td>
+                                <td class="align-middle">{{date("H:i", strtotime($exam->date_start)) }}</td>
+                                <td class="d-flex justify-content-around flex-wrap">
+                                    <button type="button" class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#{{"edit_exam_" . $exam->id}}">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </button>
 
-                            <a class="btn btn-warning me-4" href="{{ route("getActivitiesByExam", $exam->id)}}" role="button">
-                                <i class="fa fa-list" aria-hidden="true"></i>
-                            </a>
-                            {{-- <button type="button" class="btn btn-primary me-4" data-bs-toggle="modal" data-bs-target="#{{"edit_user_" . $exam->id}}">
-                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <a class="btn btn-warning me-4" href="{{ route("getActivitiesByExam", $exam->id)}}" role="button">
+                                        <i class="fa fa-list" aria-hidden="true"></i>
+                                    </a>
+                                    {{-- <button type="button" class="btn btn-primary me-4" data-bs-toggle="modal" data-bs-target="#{{"edit_user_" . $exam->id}}">
+                                        <i class="fa fa-user-plus" aria-hidden="true"></i>
 
-                            </button> --}}
+                                    </button> --}}
 
-                            <button type="button" class="btn btn-danger me-4" data-bs-toggle="modal" data-bs-target="#{{"delete_exam_" . $exam->id}}">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
+                                    <button type="button" class="btn btn-danger me-4" data-bs-toggle="modal" data-bs-target="#{{"delete_exam_" . $exam->id}}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endif
+
                     @endforeach
                 @else
 
