@@ -16,9 +16,9 @@ class APiUserController extends Controller
      * $id int
      * Permet de lister tous les exeams d'un user
      */
-    function ListExam ($id){
+    function ListExam ($token){
 
-        $user = User::find($id);
+        $user = User::where('token', $token)->first();
         $user->promotion;
         return new UserDataCollection($user);
 

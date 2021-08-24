@@ -17,20 +17,20 @@ class UserDataCollection extends JsonResource
      */
     public function toArray($request)
     {
-        $exam = new ApiEleveExamController;
-        $classement = $exam->listPromoNotarchived($this->promotion[0]->exams[0]->token);
-        $classement = json_encode($classement);
-        $classement = json_decode($classement);
-        $places = $classement->eleve;
-        $heurePassage = null;
-        $datePassage =  null;
+        // $exam = new ApiEleveExamController;
+        // $classement = $exam->listPromoNotarchived($this->promotion[0]->exams[0]->token);
+        // $classement = json_encode($classement);
+        // $classement = json_decode($classement);
+        // $places = $classement->eleve;
+        // $heurePassage = null;
+        // $datePassage =  null;
 
-        foreach ($places as $place) {
-            if($place->id === $this->id) {
-                $heurePassage = $place->heurePassage;
-                $datePassage = $place->date_exam;
-            }
-        }
+        // foreach ($places as $place) {
+        //     if($place->id === $this->id) {
+        //         $heurePassage = $place->heurePassage;
+        //         $datePassage = $place->date_exam;
+        //     }
+        // }
 
         return [
             'id'        => $this->id,
@@ -40,9 +40,7 @@ class UserDataCollection extends JsonResource
             'token'     => $this->token,
             'email'     => $this->email,
             'promotion' => new PromotionCollection($this->promotion[0]),
-            'exam'      => new ExamCollection($this->promotion[0]->exams[0]),
-            'heure_passage' => $heurePassage,
-            'date_passage'  => $datePassage
+            'exam'      => ExamCollection::collection(["promo" => $this->promotion[0]->exams, "user_id"=>$this->id]),
         ];
     }
 }
