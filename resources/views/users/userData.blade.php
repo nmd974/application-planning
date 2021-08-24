@@ -14,7 +14,7 @@
             <tbody>
                 @if (count($users))
                     @foreach ($users as $user)
-                        @if (!$user->archived)
+                        @if (!$user->pivot->archived)
                             @include('users.modal.update')
                             @include('users.modal.delete')
                             <tr>

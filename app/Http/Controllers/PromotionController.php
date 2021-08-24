@@ -56,6 +56,7 @@ class PromotionController extends Controller
     public function dataPromotionExam($id)
     {
         $dataPromotion = Promotion::find($id);
+        // dd($dataPromotion);
         return
         view("exams.examData")
         ->with(['promotion' => $dataPromotion, 'promotion_id' => $id, "label" => $dataPromotion->label]);

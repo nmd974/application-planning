@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivitieController;
+use App\Http\Controllers\ExamPromotionController;
 use App\Http\Controllers\UserPromotionController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +20,7 @@ use App\Http\Controllers\UserPromotionController;
 |
 */
 
+
 Route::get('/', [PromotionController::class, 'index']);
 Route::get('/{vue}', [PromotionController::class, 'index'])->name("getPromotions");
 
@@ -29,7 +30,7 @@ Route::get('/promotion/archived/{id}', [PromotionController::class, 'destroy']);
 Route::get('/promotion/{id}/exams', [PromotionController::class, 'dataPromotionExam'])->name("examsByPromotion");
 
 Route::post('/promotion/{id}/exams/create', [ExamController::class, 'store'])->name("createExamByPromotion");
-Route::post('/promotion/{promotion_id}/exams/{exam_id}/delete', [ExamController::class, 'store'])->name("deleteExamByPromotion");
+Route::patch('/promotion/{promotion_id}/exams/{exam_id}/delete', [ExamPromotionController::class, 'destroy'])->name("deleteExamByPromotion");
 
 Route::post("/eleve/create", [UserController::class, 'store'])->name("users.store");
 Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("users.update");
@@ -40,3 +41,5 @@ Route::patch("/exam/update/{id}", [ExamController::class, 'update'])->name("upda
 
 Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index'])->name("getActivitiesByExam");
 Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie");
+Route::patch("/exam/{exam_id}/activities/{activitie_id}/update", [ActivitieController::class, 'update'])->name("updateExamActivitie");
+Route::patch("/exam/{exam_id}/activities/{activitie_id}/delete", [ExamActivitieController::class, 'destroy'])->name("deleteActivityByExam");
