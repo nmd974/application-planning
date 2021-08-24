@@ -92,7 +92,7 @@ class ExamPromotionController extends Controller
 
         $exam_promotion = Exam_promotion::where(["exam_id" => $exam_id, "promotion_id" => $promotion_id])->get()->first();
         $exam_promotion->archived = true;
-
+        // dd($exam_promotion);
         // dd($user_promotion->first());
         if($exam_promotion->update()){
             return redirect()->route('examsByPromotion', $promotion_id)->with(['messageSuccess' => "Examen supprimé de la promotion"]);

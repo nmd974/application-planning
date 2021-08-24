@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivitieController;
+use App\Http\Controllers\ExamPromotionController;
 use App\Http\Controllers\UserPromotionController;
 
 /*
@@ -28,7 +29,7 @@ Route::get('/promotion/archived/{id}', [PromotionController::class, 'destroy']);
 Route::get('/promotion/{id}/exams', [PromotionController::class, 'dataPromotionExam'])->name("examsByPromotion");
 
 Route::post('/promotion/{id}/exams/create', [ExamController::class, 'store'])->name("createExamByPromotion");
-Route::post('/promotion/{promotion_id}/exams/{exam_id}/delete', [ExamController::class, 'store'])->name("deleteExamByPromotion");
+Route::patch('/promotion/{promotion_id}/exams/{exam_id}/delete', [ExamPromotionController::class, 'destroy'])->name("deleteExamByPromotion");
 
 Route::post("/eleve/create", [UserController::class, 'store'])->name("users.store");
 Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("users.update");
