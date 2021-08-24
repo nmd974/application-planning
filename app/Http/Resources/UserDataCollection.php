@@ -17,20 +17,34 @@ class UserDataCollection extends JsonResource
      */
     public function toArray($request)
     {
-        // $exam = new ApiEleveExamController;
-        // $classement = $exam->listPromoNotarchived($this->promotion[0]->exams[0]->token);
-        // $classement = json_encode($classement);
-        // $classement = json_decode($classement);
-        // $places = $classement->eleve;
-        // $heurePassage = null;
-        // $datePassage =  null;
+        $exam = new ApiEleveExamController;
+        $classement = [];
 
-        // foreach ($places as $place) {
-        //     if($place->id === $this->id) {
-        //         $heurePassage = $place->heurePassage;
-        //         $datePassage = $place->date_exam;
-        //     }
-        // }
+        foreach ($this->promotion[0]->exams as $dataExam) {
+            $data = $exam->listPromoNotarchived($dataExam->token);
+            $data = json_encode($data);
+            $data = json_decode($data);
+
+            $places = $data->eleve;
+
+            $heurePassage = null;
+            $datePassage = null;
+
+            foreach ($places as $place) {
+                if($place->id === $this->id) {
+                    $heurePassage = $place->heurePassage;
+                    $datePassage = $place->date_exam;
+                }
+            }
+
+            $newObject = [
+                'id'        => $data->id,
+                'label'     => $data->label,
+                'date_exam' => $datePassage,
+                'heure_exam'=> $heurePassage
+            ];
+            array_push($classement,$newObject);
+        }
 
         return [
             'id'        => $this->id,
@@ -40,7 +54,7 @@ class UserDataCollection extends JsonResource
             'token'     => $this->token,
             'email'     => $this->email,
             'promotion' => new PromotionCollection($this->promotion[0]),
-            'exam'      => ExamCollection::collection(["promo" => $this->promotion[0]->exams, "user_id"=>$this->id]),
+            'exam'      => $classement,
         ];
     }
 }
