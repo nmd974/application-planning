@@ -41,9 +41,10 @@ class UserDataCollection extends JsonResource
                 'id'        => $data->id,
                 'label'     => $data->label,
                 'date_exam' => $datePassage,
-                'heure_exam'=> $heurePassage
+                'heure_exam'=> $heurePassage,
+                'activities'=> $data->activities
             ];
-            array_push($classement,$newObject);
+            array_push($classement, $newObject);
         }
 
         return [
