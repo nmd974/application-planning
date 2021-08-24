@@ -16,6 +16,8 @@ class UserDataCollection extends JsonResource
      */
     public function toArray($request)
     {
+
+
         return [
             'id'        => $this->id,
             'last_name' => $this->last_name,
@@ -24,7 +26,8 @@ class UserDataCollection extends JsonResource
             'token'     => $this->token,
             'email'     => $this->email,
             'promotion' => new PromotionCollection($this->promotion[0]),
-            'exam'      => new ExamCollection($this->promotion[0]->exams[0])
+            'exam'      => new ExamCollection($this->promotion[0]->exams[0]),
+            'heure_passage' => ''
         ];
     }
 }
