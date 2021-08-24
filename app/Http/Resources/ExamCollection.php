@@ -19,6 +19,7 @@ class ExamCollection extends JsonResource
             'id'         => $this->id,
             'exam'       => $this->label,
             'date_exam'  => $this->date_start,
+            'token'      => $this->token,
             'activities' => Exam_activitiesCollection::collection($this->activities)
         ];
     }

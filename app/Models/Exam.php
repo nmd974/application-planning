@@ -3,11 +3,8 @@
 namespace App\Models;
 
 use App\Models\Activitie;
-<<<<<<< HEAD
 use App\Models\Promotion;
 use App\Models\Exam_activitie;
-=======
->>>>>>> 95ad509b22c12efbcb8310b6b86c10a6a9385a25
 use App\Models\Exam_promotion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
