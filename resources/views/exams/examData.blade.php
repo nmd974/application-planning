@@ -8,6 +8,7 @@
                     <th scope="col">Exam</th>
                     <th scope="col">Date</th>
                     <th scope="col">Heure de début</th>
+                    <th scope="col">Token</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                                 <td class="align-middle">{{ucfirst($exam->label) }}</td>
                                 <td class="align-middle">{{date("Y-m-d", strtotime($exam->date_start)) }}</td>
                                 <td class="align-middle">{{date("H:i", strtotime($exam->date_start)) }}</td>
+                                <td class="align-middle">{{ $exam->token }}</td>
                                 <td class="d-flex justify-content-around flex-wrap">
                                     <button type="button" class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#{{"edit_exam_" . $exam->id}}">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
