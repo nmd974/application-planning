@@ -6,6 +6,7 @@
             <thead>
                 <tr>
                     <th scope="col">Role</th>
+                    <th>Actions</th>
 
                 </tr>
             </thead>
