@@ -48,5 +48,5 @@ Route::patch("/exam/{exam_id}/activities/{activitie_id}/delete", [ExamActivitieC
 
 //CRUD roles
 
-Route::get('/role/list', [RoleController::class, 'index']);
+Route::get('/role/list', [RoleController::class, 'index'])->name('role.index');
 Route::post('/role/create',[RoleController::class,'store'])->name('role.store');

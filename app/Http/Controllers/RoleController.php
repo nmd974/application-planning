@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
@@ -37,7 +38,24 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'label' => 'required|string',
+            ]
+        );
+
+        if ($validator->fails()) {
+
+        }
+
+        $role = new Role();
+
+        $role->label = $request->label;
+
+        if($role->save() ){
+            return redirect()->route('role.index');
+        }
     }
 
     /**

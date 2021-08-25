@@ -13,7 +13,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="role">
+                        <input type="text" class="form-control" name="label">
                         <label>Role<span class="text-danger">*</span></label>
                     </div>
 
