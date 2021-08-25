@@ -54,7 +54,7 @@ class ExamController extends Controller
         $date = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
         $exam = new Exam();
         $exam->label = $request['label'];
-        $exam->token = Hash::make("".$request['label'].",".$date."");
+        $exam->token = bcrypt("".$request['label'].",".$date."");
         // $exam = new Exam();
         // $exam->label = $request['label'];
         $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
@@ -115,7 +115,7 @@ class ExamController extends Controller
         $date = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
         $exam = Exam::find($id);
         $exam->label = $request['label'];
-        $exam->token = Hash::make("".$request['label'].",".$date."");
+        $exam->token = bcrypt("".$request['label'].",".$date."");
         $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
 
         if($exam->update()){

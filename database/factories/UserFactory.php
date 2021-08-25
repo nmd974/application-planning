@@ -33,7 +33,7 @@ class UserFactory extends Factory
         return [
             'first_name' => $firstName,
             'last_name' => $lastName,
-            'token'     => Hash::make("".$firstName.",".$lastName.",".$birthday->format('Y-m-d').""),
+            'token'     => bcrypt("".$firstName.",".$lastName.",".$birthday->format('Y-m-d').""),
             'birthday' => $birthday,
             'email' => $this->faker->unique()->safeEmail(),
             'role_id' => Role::all()->random()->id,

@@ -30,7 +30,7 @@ class ActivitieController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
