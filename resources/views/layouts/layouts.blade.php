@@ -25,8 +25,8 @@
                         @yield('title-section')
                     </h2>
                 </div>
-                <a role="button" class="btn btn-success me-5" href="{{ URL::previous() }}">
-                    <i class="fa fa-arrow-left me-3" aria-hidden="true"></i>Retour
+                <a role="button" class="btn btn-success me-md-5" href="{{ URL::previous() }}">
+                    <i class="fa fa-arrow-left me-md-3" aria-hidden="true"></i>Retour
                 </a>
 
             </div>
