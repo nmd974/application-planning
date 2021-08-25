@@ -6,36 +6,26 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="create_eleveLabel">Ajouter un élève</h5>
+                <h5 class="modal-title" id="create_eleveLabel">Ajouter un role</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="">
+            <form method="post" action="{{route('role.store')}}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="last_name">
-                        <label>Nom<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="role">
+                        <label>Role<span class="text-danger">*</span></label>
                     </div>
-                    <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="first_name">
-                        <label>Prenom<span class="text-danger">*</span></label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" name="email">
-                        <label>Email<span class="text-danger">*</span></label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" name="date_birth">
-                        <label>Date de naissance<span class="text-danger">*</span></label>
-                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn btn-success" name="create">Créer</button>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
-                <input type="hidden" name="promotion_id" value="{{ $promotion_id }}">
-                {{-- <input type="hidden" name="promotion_id" value="{{ $role_id }}"> --}}
+
+
             </form>
         </div>
     </div>

@@ -18,6 +18,13 @@
         <i class="fa fa-users me-3" aria-hidden="true"></i>
         <div>Utilisateurs</div>
       </a>
+          <a href="/role/list"
+             class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
+              <i class="fa fa-users me-3" aria-hidden="true"></i>
+              <div>Roles</div>
+          </a>
+
+
       <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
         <i class="fa fa-cogs me-3" aria-hidden="true"></i>

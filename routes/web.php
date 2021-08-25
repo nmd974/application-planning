@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivitieController;
 use App\Http\Controllers\ExamPromotionController;
 use App\Http\Controllers\UserPromotionController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,9 @@ Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index
 Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie");
 Route::patch("/exam/{exam_id}/activities/{activitie_id}/update", [ActivitieController::class, 'update'])->name("updateExamActivitie");
 Route::patch("/exam/{exam_id}/activities/{activitie_id}/delete", [ExamActivitieController::class, 'destroy'])->name("deleteActivityByExam");
+
+
+//CRUD roles
+
+Route::get('/role/list', [RoleController::class, 'index']);
+Route::post('/role/create',[RoleController::class,'store'])->name('role.store');
