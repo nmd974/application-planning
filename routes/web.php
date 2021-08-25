@@ -29,6 +29,7 @@ Route::post('/promotion/create', [PromotionController::class, 'store'])->name("p
 Route::get('/promotion/archived/{id}', [PromotionController::class, 'destroy']);
 Route::get('/promotion/{id}/exams', [PromotionController::class, 'dataPromotionExam'])->name("examsByPromotion");
 
+route::patch('/promotion/{id}/update', [PromotionController::class, 'update'])->name('updatePromotion');
 Route::post('/promotion/{id}/exams/create', [ExamController::class, 'store'])->name("createExamByPromotion");
 Route::patch('/promotion/{promotion_id}/exams/{exam_id}/delete', [ExamPromotionController::class, 'destroy'])->name("deleteExamByPromotion");
 

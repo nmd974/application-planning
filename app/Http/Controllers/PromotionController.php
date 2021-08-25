@@ -30,6 +30,7 @@ class PromotionController extends Controller
     public function  listPromotionData($msg = null)
     {
         $promotionsNotArchived = Promotion::where("archived", 0)->get();
+        // dd($promotionsNotArchived);
         return
             view("promotions.promotionData")
             ->with('promotions', $promotionsNotArchived)
@@ -88,7 +89,7 @@ class PromotionController extends Controller
         );
 
         if ($validator->fails()) {
-            return $this->listPromotionData()->with(['messageError', 'Error création promo']);
+            return $this->listPromotionData('Echec lors de la modification de la promotion');
         }
 
         $promotion = New Promotion ;
@@ -96,8 +97,9 @@ class PromotionController extends Controller
         $promotion->label = $request->label;
 
         if($promotion->save()){
-            return $this->listPromotionData()->with(['messageSuccess' => "Promo créé"]);
+            return $this->listPromotionData("Promotion créée avec succès");
         }
+        return $this->listPromotionData("Echec lors de la modification de la promotion");
     }
 
     /**
@@ -129,9 +131,29 @@ class PromotionController extends Controller
      * @param  \App\Models\Promotion  $promotion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Promotion $promotion)
+    public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'label' => 'required|string|max:100',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return $this->listPromotionData('Echec lors de la modification de la promotion');
+        }
+
+        $promotion = Promotion::find($id);
+
+        $promotion->label = $request->label;
+
+        if($promotion->update()){
+            return $this->listPromotionData("Promotion modifée avec succès");
+        }
+        return $this->listPromotionData("Echec lors de la modification de la promotion");
+
     }
 
     /**
