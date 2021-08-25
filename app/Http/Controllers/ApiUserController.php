@@ -12,6 +12,48 @@ use Illuminate\Support\Facades\Validator;
 
 class APiUserController extends Controller
 {
+        /**
+     * @OA\Get(
+     *      path="/user/{id}",
+     *      operationId="GetAllExamsByUser",
+     *      tags={"token"},
+
+     *      summary="Get all exams for a user",
+     *      description="Returns all exams with there activities, hours and date for a specific student",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *  )
+     */
+
     /*
      * $id int
      * Permet de lister tous les exeams d'un user
