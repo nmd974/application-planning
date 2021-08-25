@@ -14,14 +14,14 @@ class APiUserController extends Controller
 {
         /**
      * @OA\Get(
-     *      path="/user/{id}",
+     *      path="/user/exam?token={token}",
      *      operationId="GetAllExamsByUser",
      *      tags={"token"},
 
      *      summary="Get all exams for a user",
      *      description="Returns all exams with there activities, hours and date for a specific student",
      *      @OA\Parameter(
-     *          name="id",
+     *          name="token",
      *          in="path",
      *          required=true,
      *          @OA\Schema(

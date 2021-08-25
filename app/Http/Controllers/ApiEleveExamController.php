@@ -10,14 +10,20 @@ use Illuminate\Http\Request;
 
 class ApiEleveExamController extends Controller
 {
-            /**
+
+    function listEleves()
+    {
+        $eleves = User::where('role_id',1)->get();
+        return $eleves;
+    }
+     /**
      * @OA\Get(
-     *      path="/jury/{id}",
-     *      operationId="GettAllStudentsWithExams",
+     *      path="/jury/exam/{token}",
+     *      operationId="GetListForJury",
      *      tags={"token"},
 
-     *      summary="Get all exams for all students for a promo",
-     *      description="Returns all students ",
+     *      summary="Get all exams with activities and all students with their hour for a jury of a promotion",
+     *      description="Returns all exams with activities and all students with their hour for a jury of a promotion. Token is given for an exam that is linked to a promotion",
      *      @OA\Parameter(
      *          name="token",
      *          in="path",
@@ -51,12 +57,6 @@ class ApiEleveExamController extends Controller
      *   ),
      *  )
      */
-    function listEleves()
-    {
-        $eleves = User::where('role_id',1)->get();
-        return $eleves;
-    }
-
     function listPromoNotarchived($token)
     {
         $exam = Exam::where('token', $token);

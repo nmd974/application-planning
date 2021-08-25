@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Api covid19 Documentation",
-        "description": "Implementation of Swagger with in Laravel",
+        "title": "Api gestion planning simplon",
+        "description": "Consommer les données générées par le back, pour afficher les examens prévus pour les etudiants",
         "contact": {
             "email": "admin@admin.com"
         },
@@ -19,7 +19,47 @@
         }
     ],
     "paths": {
-        "/user/{id}": {
+        "/jury/exam/{token}": {
+            "get": {
+                "tags": [
+                    "token"
+                ],
+                "summary": "Get all exams with activities and all students with their hour for a jury of a promotion",
+                "description": "Returns all exams with activities and all students with their hour for a jury of a promotion. Token is given for an exam that is linked to a promotion",
+                "operationId": "GetListForJury",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/user/exam?token={token}": {
             "get": {
                 "tags": [
                     "token"
@@ -29,7 +69,7 @@
                 "operationId": "GetAllExamsByUser",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "token",
                         "in": "path",
                         "required": true,
                         "schema": {
