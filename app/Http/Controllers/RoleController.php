@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
@@ -14,7 +15,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::All();
+
+        return view('roles.roleData', ['roles'=>$roles]);
     }
 
     /**
@@ -35,7 +38,24 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'label' => 'required|string',
+            ]
+        );
+
+        if ($validator->fails()) {
+
+        }
+
+        $role = new Role();
+
+        $role->label = $request->label;
+
+        if($role->save() ){
+            return redirect()->route('role.index');
+        }
     }
 
     /**
@@ -57,7 +77,6 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
     }
 
     /**
@@ -67,9 +86,27 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request,$id)
     {
-        //
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'label' => 'required|string',
+            ]
+        );
+
+        if ($validator->fails()) {
+
+        }
+
+        $roles = Role::find($id);
+
+        $roles->label = $request->label;
+        if($roles->update()){
+            return redirect()->route('role.index');
+        }
+
     }
 
     /**
@@ -78,8 +115,14 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Role $role, $id)
     {
-        //
+        $role = Role::find($id);
+
+        if($role->delete() ){
+            return redirect()->route('role.index');
+        }
+
+
     }
 }
