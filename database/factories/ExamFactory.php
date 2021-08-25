@@ -27,7 +27,7 @@ class ExamFactory extends Factory
         return [
             'label' => $label,
             'date_start' => $date,
-            'token'     =>  bcrypt("".$label.",".$date.""),
+            'token'     =>  md5("".$label.",".$date.""),
             'archived' => false,
         ];
     }
