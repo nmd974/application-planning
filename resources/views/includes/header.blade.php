@@ -13,16 +13,22 @@
         <i class="fa fa-graduation-cap me-3" aria-hidden="true"></i>
         <div>Promotions</div>
       </a>
-      {{-- <a href="#"
+      <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
         <i class="fa fa-users me-3" aria-hidden="true"></i>
         <div>Utilisateurs</div>
-      </a> --}}
+      </a>
+          <a href="/role/list"
+             class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
+              <i class="fa fa-users me-3" aria-hidden="true"></i>
+              <div>Roles</div>
+          </a>
+
+
       <a href="#"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
-        {{-- <i class="fa fa-cogs me-3" aria-hidden="true"></i> --}}
-        <i class="fa fa-power-off me-3" id="logout" style="color:white;" aria-hidden="true"></i>
-        <div>Se déconnecter</div>
+        <i class="fa fa-cogs me-3" aria-hidden="true"></i>
+        <div>Deconnecter</div>
       </a>
     </div>
   </div>
@@ -30,9 +36,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
       <div class="container-fluid d-flex justify-content-between">
         <div class="ms-2 d-flex align-items-center">
-            <i class="fa fa-close fa-2x fa-action" style="color:white;" aria-hidden="true" id="sidebar-toggle"></i>
+          <i class="fa fa-close fa-2x fa-action" style="color:white;" aria-hidden="true"
+          id="sidebar-toggle"></i>
+
         </div>
-        <a class="navbar-brand ms-2" href="./accueil.php">Administration du planning</a>
+        <a class="navbar-brand ms-2" href="./accueil.php">Paramétrage du planning</a>
         <a href="#"><i class="fa fa-power-off fa-2x me-2 fa-action" id="logout" style="color:white;" aria-hidden="true"></i></a>
       </div>
     </nav>
