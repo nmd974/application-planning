@@ -18,8 +18,17 @@ class ExamActivitieController extends Controller
     public function index($exam_id)
     {
         $exam_activities = Exam::find($exam_id);
+        // $exam_activities = Exam_activitie::where(["archived" => 0, "exam_id" => $exam_id])->get();
         $exam = Exam::find($exam_id);
         $list_activities = Activitie::where("archived", 0)->get();
+        // dd($exam_activities);
+        // $activities = array();
+        // if(!empty($exam_activities)){
+        //    foreach($exam_activities as $e){
+        //        $activities[] = $e->activities;
+        //    }
+        // }
+        // dd($activities);
         return
         view("activities.activitiesData")
         ->with(['activities' => $exam_activities->activities, "exam" => $exam, 'list_activities' => $list_activities]);
@@ -55,13 +64,10 @@ class ExamActivitieController extends Controller
     {
         //
         $exam_activitie = Exam_activitie::where(["activitie_id" => $activitie_id, "exam_id" => $exam_id])->get()->first();
-        $activitie = Activitie::find($activitie_id)->first();
         $exam_activitie->activities;
         $exam_activitie->exams;
         if($exam_activitie){
             $response = json_encode($exam_activitie);
-            // $response = json_decode($exam_activitie);
-            // dd($response);
             return $response;
         }else{
             $response = array("error" => "Cette activité n'existe pas");

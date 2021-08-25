@@ -54,6 +54,9 @@ Route::post('/role/create',[RoleController::class,'store'])->name('role.store');
 Route::patch('/role/update/{id}', [RoleController::class,'update'])->name('role.update');
 Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
 
-//AJAX modal
+//AJAX modal activities
+Route::get('/exam/{exam_id}/activities/{activitie_id}', [ExamActivitieController::class, 'show']);
+Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);
+//AJAX modal examens
 Route::get('/exam/{exam_id}/activities/{activitie_id}', [ExamActivitieController::class, 'show']);
 Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);

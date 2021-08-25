@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="edit_activitieLabel"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="">
+            <form method="post" action="" id="form_update_activitie">
                 @csrf
                 @method('patch')
                 <div class="modal-body">
@@ -28,12 +28,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success" name="update">Modifier</button>
+                    <button type="submit" class="btn btn-success" name="update" id="update_activitie_button">Modifier</button>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
             </form>
         </div>
     </div>
 </div>
-{{-- {{ route('updateExamActivitie',[$activitie->pivot->exam_id, $activitie->pivot->activitie_id]) }} --}}
-{{-- http://127.0.0.1/exam/8/activities/1/update --}}

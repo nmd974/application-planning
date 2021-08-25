@@ -9,7 +9,7 @@
                 <h5 class="modal-title" id="create_activitieLabel">Ajouter un examen à l'activité {{$exam->label}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{ route("createExamActivitie", $exam->id) }}">
+            <form method="post" id="form_create_activitie" action="{{ route("createExamActivitie", $exam->id) }}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-3">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success" name="create">Créer</button>
+                    <button type="submit" class="btn btn-success" name="create" id="create_activitie_button">Créer</button>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <input type="hidden" name="exam_id" value="{{ $exam->id }}">
@@ -43,39 +43,4 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    const input_label = document.querySelector("[list='activities_list']");
-    var id = 0;
-    input_label.addEventListener('keyup', (e) => {
-        setTimeout(() => {
-            const elements = document.querySelectorAll("#activities_list option");
-            elements.forEach(el => {
-                if(el.value == e.target.value){
-                    id = el.getAttribute("data-id");
-                    return false;
-                }
-            })
-            let xhr = new XMLHttpRequest();
-            xhr.open("GET", `{{getenv("APP_URL")}}activities/${id}`);
-            xhr.responseType = "json";
-            xhr.send();
-            xhr.onload = function(){
-                if (xhr.status != 200){
-                    console.log("Erreur " + xhr.status + " : " + xhr.statusText);
-                }else{
-                    data = xhr.response;
-                    console.log(data);
-                    document.querySelector("#create_activitie [name='label']").value = data.activities.label;
-                    document.querySelector("#create_activitie [name='duration']").value = `${tranform_hours(data.duration)}`;
-                    document.querySelector("#create_activitie [name='order']").value = data.order;
-                }
-            };
-            xhr.onerror = function(){
-                console.log("La requête a échoué");
-            };
-        }, 500);
-    })
-</script>
 
