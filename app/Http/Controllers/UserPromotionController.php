@@ -35,6 +35,10 @@ class UserPromotionController extends Controller
      */
     public function store($user_id, $promotion_id)
     {
+        $verify = User_promotion::where([['user_id', $user_id],['promotion_id', $promotion_id]])->first();
+        if($verify) {
+            return false;
+        }
         //
         $user_promotion = new User_promotion();
         $user_promotion->promotion_id = $promotion_id;
