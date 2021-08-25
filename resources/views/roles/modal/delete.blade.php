@@ -1,4 +1,4 @@
-role<div class="modal fade" id="delete_role_{{$role->id}}" tabindex="-1" aria-labelledby="delet_activitie_{{$role->id}}Label" aria-hidden="true">
+<div class="modal fade" id="delete_role_{{$role->id}}" tabindex="-1" aria-labelledby="delet_activitie_{{$role->id}}Label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
