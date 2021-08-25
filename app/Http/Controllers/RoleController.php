@@ -77,7 +77,6 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
     }
 
     /**
@@ -87,9 +86,27 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request,$id)
     {
-        //
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'label' => 'required|string',
+            ]
+        );
+
+        if ($validator->fails()) {
+
+        }
+
+        $roles = Role::find($id);
+
+        $roles->label = $request->label;
+        if($roles->update()){
+            return redirect()->route('role.index');
+        }
+
     }
 
     /**

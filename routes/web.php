@@ -50,3 +50,4 @@ Route::patch("/exam/{exam_id}/activities/{activitie_id}/delete", [ExamActivitieC
 
 Route::get('/role/list', [RoleController::class, 'index'])->name('role.index');
 Route::post('/role/create',[RoleController::class,'store'])->name('role.store');
+Route::patch('/role/update/{id}', [RoleController::class,'update'])->name('role.update');

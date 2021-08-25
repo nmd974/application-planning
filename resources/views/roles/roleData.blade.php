@@ -11,6 +11,7 @@
             </thead>
             <tbody>
                 @foreach ($roles as $role)
+                    @include('roles.modal.update')
                 <tr>
 
                     <td class="align-middle">{{ $role->label  }}</td>
@@ -19,7 +20,7 @@
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
 
-                        <button type="button" class="btn btn-danger me-4" data-bs-toggle="modal" data-bs-target="#{{"delete_role_" . $role->id}}">
+                        <button type="button" class="btn btn-danger me-4" data-bs-toggle="modal" data-bs-target="#{{"delete_role_" .$role->id}}">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </td>
