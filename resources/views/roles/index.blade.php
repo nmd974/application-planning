@@ -1,4 +1,13 @@
 @extends('layouts.layouts')
+@section('title')
+    Gestion des roles
+@endsection
+
+
+@section('title-section')
+    Gestion des roles
+@endsection
+
 @section('content')
 
 <form class="d-flex" method="post">
