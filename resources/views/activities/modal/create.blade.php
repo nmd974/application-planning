@@ -13,18 +13,23 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="label" required>
+                        <input autocomplete="false" type="text" list="activities_list" class="form-control" name="label" required>
+                        <datalist id="activities_list">
+                            @foreach ($list_activities as $a)
+                                <option value="{{$a->label}}" data-id="{{$a->id}}">
+                            @endforeach
+                          </datalist>
                         <label>Intitulé<span class="text-danger">*</span></label>
                     </div>
                     <div class="form-floating mb-3">
 
                         <input type="time" class="form-control" id="duration" name="duration">
-                        <label for="duration" required>Durée</label>
+                        <label for="duration" required>Durée*</label>
                     </div>
                     <div class="form-floating mb-3">
 
                         <input type="number" class="form-control" id="order" name="order">
-                        <label for="order" required>Ordre</label>
+                        <label for="order" required>Ordre*</label>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -39,4 +44,38 @@
     </div>
 </div>
 
+
+<script>
+    const input_label = document.querySelector("[list='activities_list']");
+    var id = 0;
+    input_label.addEventListener('keyup', (e) => {
+        setTimeout(() => {
+            const elements = document.querySelectorAll("#activities_list option");
+            elements.forEach(el => {
+                if(el.value == e.target.value){
+                    id = el.getAttribute("data-id");
+                    return false;
+                }
+            })
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", `{{getenv("APP_URL")}}activities/${id}`);
+            xhr.responseType = "json";
+            xhr.send();
+            xhr.onload = function(){
+                if (xhr.status != 200){
+                    console.log("Erreur " + xhr.status + " : " + xhr.statusText);
+                }else{
+                    data = xhr.response;
+                    console.log(data);
+                    document.querySelector("#create_activitie [name='label']").value = data.activities.label;
+                    document.querySelector("#create_activitie [name='duration']").value = `${tranform_hours(data.duration)}`;
+                    document.querySelector("#create_activitie [name='order']").value = data.order;
+                }
+            };
+            xhr.onerror = function(){
+                console.log("La requête a échoué");
+            };
+        }, 500);
+    })
+</script>
 
