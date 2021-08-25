@@ -56,6 +56,7 @@ class JuryDataCollection extends JsonResource
             'promotion'     => new PromotionCollection($this->promotion[0]),
             'eleve'         => UserCollection::collection($tabHeurePassage),
             'activities'    => Exam_activitiesCollection::collection($this->activities),
+            'error'         => false
         ];
     }
 }

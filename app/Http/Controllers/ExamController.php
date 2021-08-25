@@ -57,7 +57,7 @@ class ExamController extends Controller
         $exam->token = Hash::make("".$request['label'].",".$date."");
         // $exam = new Exam();
         // $exam->label = $request['label'];
-        // $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));;
+        $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
 
         if($exam->save()){
             $exam_promotion = new ExamPromotionController();

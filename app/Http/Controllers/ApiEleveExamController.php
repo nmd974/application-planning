@@ -18,7 +18,19 @@ class ApiEleveExamController extends Controller
 
     function listPromoNotarchived($token)
     {
-        $exam = Exam::where('token', $token)->first();
-        return new JuryDataCollection($exam);
+        $exam = Exam::where('token', $token);
+        $exam = $exam->first();
+        $exam->promotion;
+
+        foreach ($exam->promotion as $promo) {
+            if(!$promo->pivot->archived){
+                return new JuryDataCollection($exam);
+            }else{
+                return [
+                    "error"   => true,
+                    "message" => "l'examan n'existe plus"
+                ];
+            };
+        }
     }
 }

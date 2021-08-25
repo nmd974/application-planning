@@ -17,40 +17,44 @@ class UserDataCollection extends JsonResource
      */
     public function toArray($request)
     {
-        $exam = new ApiEleveExamController;
+        //$exam = new ApiEleveExamController;
         $classement = [];
 
         foreach ($this->promotion[0]->exams as $dataExam) {
+            $exam = new ApiEleveExamController;
             $data = $exam->listPromoNotarchived($dataExam->token);
+
             $data = json_encode($data);
             $data = json_decode($data);
 
-            $places = $data->eleve;
+            if (!$data->error) {
+                $places = $data->eleve;
 
-            $heurePassage = null;
-            $datePassage = null;
+                $heurePassage = null;
+                $datePassage = null;
 
-            foreach ($places as $place) {
-                if($place->id === $this->id) {
-                    $heurePassage = $place->heurePassage;
-                    $datePassage = $place->date_exam;
+                foreach ($places as $place) {
+                    if ($place->id === $this->id) {
+                        $heurePassage = $place->heurePassage;
+                        $datePassage = $place->date_exam;
+                    }
                 }
-            }
 
-            $newObject = [
-                'id'        => $data->id,
-                'label'     => $data->label,
-                'date_exam' => $datePassage,
-                'heure_exam'=> $heurePassage,
-                'activities'=> $data->activities
-            ];
-            array_push($classement, $newObject);
+                $newObject = [
+                    'id'        => $data->id,
+                    'label'     => $data->label,
+                    'date_exam' => $datePassage,
+                    'heure_exam' => $heurePassage,
+                    'activities' => $data->activities
+                ];
+                array_push($classement, $newObject);
+            }
         }
 
         return [
             'id'        => $this->id,
             'last_name' => $this->last_name,
-            'first_name'=> $this->first_name,
+            'first_name' => $this->first_name,
             'birthday'  => $this->birthday,
             'token'     => $this->token,
             'email'     => $this->email,

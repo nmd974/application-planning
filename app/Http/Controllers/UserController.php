@@ -35,9 +35,9 @@ class UserController extends Controller
         $validator = Validator::make($request->all(),
         [
             'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|max:255|email',
-            'birthday' => 'required|date',
+            'last_name'  => 'required|max:255',
+            'email'      => 'required|max:255|email|unique:table,column,except,id',
+            'birthday'   => 'required|date',
         ]);
 
         if($validator->fails()){
