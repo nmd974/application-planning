@@ -48,7 +48,7 @@
         </div>
     </div>
 </div>
-
+<script src="{{ getenv("APP_URL") . '/js/share.js' }}"></script>
 <script>
     $(document).ready(function (){
         $("#sidebar-toggle").click(function (e) {

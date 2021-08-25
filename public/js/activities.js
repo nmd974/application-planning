@@ -1,31 +1,5 @@
-//Fonction commune pour cette partie
-const tranform_hours = (data) => {
-    var nbHour = parseInt(data / 60);
-    if(nbHour < 10){
-        nbHour = "0" + nbHour.toString();
-    }
-    var nbminuteRestante = data % 60;
-    if (nbminuteRestante == 0) {
-        return nbHour + ":";
-    } else {
-
-        return nbHour + ":" + nbminuteRestante;
-    }
-}
-
 //Validation rules
 let validator;
-jQuery.validator.addMethod(
-    "regex",
-     function(value, element, regexp) {
-         if (regexp.constructor != RegExp)
-            regexp = new RegExp(regexp);
-         else if (regexp.global)
-            regexp.lastIndex = 0;
-            return this.optional(element) || regexp.test(value);
-     },"Format incorrect"
-  );
-
 const activities_validator = (formulaire_id) => {
     validator = $(`#${formulaire_id}`).validate({
         errorElement: "em",
@@ -84,7 +58,7 @@ input_label.addEventListener('keyup', (e) => {
             if (xhr.status != 200){
                 console.log("Erreur " + xhr.status + " : " + xhr.statusText);
             }else{
-                data = xhr.response;
+                var data = xhr.response;
                 console.log(data);
                 document.querySelector("#create_activitie [name='label']").value = data.activities.label;
                 document.querySelector("#create_activitie [name='duration']").value = `${tranform_hours(data.duration)}`;
@@ -128,7 +102,7 @@ btn_update.forEach(element => {
             if (xhr.status != 200){
                 alert("Erreur " + xhr.status + " : " + xhr.statusText);
             }else{
-                data = xhr.response;
+                var data = xhr.response;
                 document.getElementById("edit_activitieLabel").innerHTML = "Modifier une activité de l'examen : " + data.exams.label;
                 document.querySelector("#edit_activitie [name='label']").value = data.activities.label;
                 document.querySelector("#edit_activitie [name='duration']").value = `${tranform_hours(data.duration)}`;
@@ -171,7 +145,7 @@ btn_delete.forEach(element => {
             if (xhr.status != 200){
                 alert("Erreur " + xhr.status + " : " + xhr.statusText);
             }else{
-                data = xhr.response;
+                var data = xhr.response;
                 document.getElementById("text_confirmation").innerHTML = "Confirmez vous la suppression de l'activité : " + data.activities.label
                 var formulaire = document.querySelector("#delete_activitie [method='post'");
                 formulaire.setAttribute("action", `${url}exam/${id_exam}/activities/${id}/delete`);

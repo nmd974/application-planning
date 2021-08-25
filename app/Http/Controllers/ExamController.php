@@ -75,9 +75,12 @@ class ExamController extends Controller
      * @param  \App\Models\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function show(Exam $exam)
+    public function show($id)
     {
         //
+        $exam = Exam::find($id);
+        // dd(json_encode($exam));
+        return json_encode($exam);
     }
 
     /**

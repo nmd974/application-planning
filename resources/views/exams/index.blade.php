@@ -15,7 +15,6 @@ Gestion de la promotion {{ $label }}
     </form>
     @include('exams.modal.create')
     </div>
-{{-- {{dd(Route::currentRouteName())}} --}}
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link {{ Route::currentRouteName() == 'usersByPromotion' ? 'active' : '' }}" aria-current="page" href="{{ route("usersByPromotion", $promotion_id) }}">Liste des élèves</a>
@@ -27,4 +26,5 @@ Gestion de la promotion {{ $label }}
     <div class="container-fluid">
         @yield('exams')
     </div>
+    <script src="{{ getenv("APP_URL") . '/js/examen.js' }}"></script>
 @endsection

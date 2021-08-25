@@ -22,5 +22,4 @@ Déroulé de l'examen {{ $exam->label }}
         @yield('activities')
     </div>
     <script src="{{ getenv("APP_URL") . '/js/activities.js' }}"></script>
-    <script src="{{ getenv("APP_URL") . '/js/share.js' }}"></script>
 @endsection

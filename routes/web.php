@@ -39,7 +39,7 @@ Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("use
 
 Route::patch("/eleve/{user_id}/promotion/{promotion_id}/delete", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy");
 
-Route::patch("/exam/update/{id}", [ExamController::class, 'update'])->name("updateExam");
+Route::patch("/exam/{id}/update", [ExamController::class, 'update'])->name("updateExam");
 
 Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index'])->name("getActivitiesByExam");
 Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie");
@@ -57,6 +57,7 @@ Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('ro
 //AJAX modal activities
 Route::get('/exam/{exam_id}/activities/{activitie_id}', [ExamActivitieController::class, 'show']);
 Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);
+
 //AJAX modal examens
-Route::get('/exam/{exam_id}/activities/{activitie_id}', [ExamActivitieController::class, 'show']);
-Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);
+Route::get('/exam/{id}', [ExamController::class, 'show']);
+// Route::get('/exam/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);
