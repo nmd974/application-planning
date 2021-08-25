@@ -39,7 +39,7 @@
                 @else
 
                 <tr>
-                    <td class="align-middle" colspan="4">Vous n'avez pas d'élèves enregistrés</td>
+                    <td class="align-middle" colspan="5">Vous n'avez pas d'élèves enregistrés</td>
                 </tr>
                 @endif
             </tbody>

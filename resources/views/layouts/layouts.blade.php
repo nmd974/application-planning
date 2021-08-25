@@ -17,10 +17,18 @@
     @include('includes.header')
     <div class="container-fluid">
         <div id="starting-page">
-            <div class="title-content d-flex align-items-center">
-                <div class="delimiter-title"></div>
-                <div class="delimiter-title ms-1"></div>
-                <h2 class="ms-4">@yield('title-section')</h2>
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="title-content d-flex align-items-center">
+                    <div class="delimiter-title"></div>
+                    <div class="delimiter-title ms-1"></div>
+                    <h2 class="ms-4">
+                        @yield('title-section')
+                    </h2>
+                </div>
+                <a role="button" class="btn btn-success me-5" href="{{ URL::previous() }}">
+                    <i class="fa fa-arrow-left me-3" aria-hidden="true"></i>Retour
+                </a>
+
             </div>
             <div class="bloc-content">
                 <div class="content-bloc shadow-lg p-md-5 p-1 h-100 d-flex flex-column">
