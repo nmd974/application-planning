@@ -12,6 +12,7 @@
             <tbody>
                 @foreach ($roles as $role)
                     @include('roles.modal.update')
+                    @include('roles.modal.delete')
                 <tr>
 
                     <td class="align-middle">{{ $role->label  }}</td>
