@@ -12,8 +12,8 @@ class Controller extends BaseController
     /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="Api covid19 Documentation",
- *      description="Implementation of Swagger with in Laravel",
+ *      title="Api gestion planning simplon",
+ *      description="Consommer les données générées par le back, pour afficher les examens prévus pour les etudiants",
  *      @OA\Contact(
  *          email="admin@admin.com"
  *      ),
