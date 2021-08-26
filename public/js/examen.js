@@ -64,7 +64,7 @@ btn_update.forEach(element => {
         id_exam = element.getAttribute("data-id");
         let xhr = new XMLHttpRequest();
         xhr.open("GET", `${url}exam/${id_exam}`);
-        console.log(`${url}exam/${id_exam}`);
+        // console.log(`${url}exam/${id_exam}`);
         xhr.responseType = "json";
         xhr.send();
         xhr.onload = function(){

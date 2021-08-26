@@ -60,4 +60,6 @@ Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActiviti
 
 //AJAX modal examens
 Route::get('/exam/{id}', [ExamController::class, 'show']);
-// Route::get('/exam/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);
+
+//AJAX modal promotion
+Route::get('/promotion/{id}/infos', [PromotionController::class, 'getInfoPromotion']);

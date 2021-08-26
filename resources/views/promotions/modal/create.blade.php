@@ -12,7 +12,7 @@
                 <h5 class="modal-title" id="create_userLabel">Créer une Promotion</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{ route('promotion.store') }}">
+            <form method="post" action="{{ route('promotion.store') }}" id="form_create_promotion">
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-3">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success" name="create" >Créer</button>
+                    <button type="submit" class="btn btn-success" name="create" id="create_promotion_button" >Créer</button>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
             </form>

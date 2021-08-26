@@ -63,16 +63,10 @@ class PromotionController extends Controller
         ->with(['promotion' => $dataPromotion, 'promotion_id' => $id, "label" => $dataPromotion->label]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function getInfoPromotion($id){
+        $dataPromotion = Promotion::find($id);
+        return json_encode($dataPromotion);
     }
-
     /**
      * Store a newly created resource in storage.
      *

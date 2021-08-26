@@ -1,8 +1,9 @@
 @extends('promotions.index')
 @section('promotion')
+@include('promotions.modal.update')
 <div class="row mt-4">
     @foreach ( $promotions as $promotion)
-    @include('promotions.modal.update')
+
     <div class="col-xs-12 col-sm-11 col-md-3">
         <div class="card">
             <div class="card-header">
@@ -12,7 +13,7 @@
                 <a type="button" class="btn btn-outline-secondary"  href="/promotion/{{ $promotion->id }}">
                     <i class="fa fa-eye" aria-hidden="true"></i>
                 </a>
-                <button type="button" class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#{{"edit_promotion_" . $promotion->id}}">
+                <button type="button" class="btn btn-success me-4" data-id="{{$promotion->id}}" data-action="update">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </button>
                 @if(!$promotion->archived)
@@ -25,4 +26,5 @@
     </div>
     @endforeach
 </div>
+<script src="{{ getenv("APP_URL") . '/js/promotions.js' }}"></script>
 @endsection
