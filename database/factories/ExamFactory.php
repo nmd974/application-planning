@@ -22,7 +22,7 @@ class ExamFactory extends Factory
      */
     public function definition()
     {
-        $label = $this->faker->word(4, true);
+        $label = "Titre professionnel";
         $date = date("Y-m-d H:i:s", time());
         return [
             'label' => $label,

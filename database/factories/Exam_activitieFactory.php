@@ -15,7 +15,7 @@ class Exam_activitieFactory extends Factory
      * @var string
      */
     protected $model = Exam_activitie::class;
-    private static $order = 1;
+    public $counter = 1;
     /**
      * Define the model's default state.
      *
@@ -23,12 +23,34 @@ class Exam_activitieFactory extends Factory
      */
     public function definition()
     {
+        $examen_cda = array(
+            1 => array(
+                "libelle" => "Présentation d'un projet réalisé en amont de la session",
+                "duration" => 40
+            ),
+            2 => array(
+                "libelle" => "Entretien technique & Questionnaire professionnel & Questionnement à partir de production(s)",
+                "duration" => 45
+            ),
+            3 => array(
+                "libelle" => "Entretien final",
+                "duration" => 20
+            )
+        );
 
-        return [
-            "duration" => $this->faker->numberBetween($min = 5, $max = 120),
-            "order" => self::$order += 1,
-            "activitie_id" => Activitie::all()->random()->id,
+        $data = [
+            'duration' => $examen_cda[$this->getCounter()]["duration"],
+            'order' => $this->getCounter(),
+            'activitie_id' => $this->getCounter(),
             "exam_id" => Exam::find(1),
         ];
+        $this->setCounter();
+        return $data;
+    }
+    public function getCounter(){
+        return $this->counter;
+    }
+    public function setCounter(){
+        return $this->counter += 1;
     }
 }
