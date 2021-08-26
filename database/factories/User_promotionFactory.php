@@ -15,7 +15,7 @@ class User_promotionFactory extends Factory
      * @var string
      */
     protected $model = User_promotion::class;
-
+    public $counter = 0;
     /**
      * Define the model's default state.
      *
@@ -23,10 +23,16 @@ class User_promotionFactory extends Factory
      */
     public function definition()
     {
-
+        $this->setCounter();
         return [
-            'user_id' => User::all()->random()->id,
-            'promotion_id' => Promotion::all()->random()->id,
+            'user_id' => $this->getCounter(),
+            'promotion_id' => Promotion::find(1),
         ];
+    }
+    public function getCounter(){
+        return $this->counter;
+    }
+    public function setCounter(){
+        return $this->counter += 1;
     }
 }

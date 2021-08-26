@@ -1,16 +1,16 @@
-<div class="modal fade" id="delete_role_{{$role->id}}" tabindex="-1" aria-labelledby="delet_activitie_{{$role->id}}Label" aria-hidden="true">
+<div class="modal fade" id="delete_role" tabindex="-1" aria-labelledby="delet_roleLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="delet_role_{{$role->id}}Label">Suppression d'un role</h5>
+                <h5 class="modal-title" id="delet_roleLabel">Suppression d'un rôle</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{ route('role.destroy',[$role->id]) }}">
-                @method('delete')
+            <form method="post" action="">
+                @method('DELETE')
                 @csrf
 
                 <div class="modal-body">
-                    <p>Confirmez vous la suppression de ce role : "{{$role->label }}"</p>
+                    <p id="text_confirmation"></p>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <div class="modal-footer">

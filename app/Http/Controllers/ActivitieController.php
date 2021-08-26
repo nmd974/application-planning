@@ -24,16 +24,6 @@ class ActivitieController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,25 +60,32 @@ class ActivitieController extends Controller
     }
 
     /**
+     * Display all activities
+     *  @param  \App\Models\Activitie  $activitie
+     *
+     */
+    public function getAllActivities(){
+        $activities = Activitie::where("archived", 0)->get();
+        return $activities;
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Activitie  $activitie
      * @return \Illuminate\Http\Response
      */
-    public function show(Activitie $activitie)
+    public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Activitie  $activitie
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Activitie $activitie)
-    {
-        //
+        // $activitie = Activitie::find($id)->first();
+        $activities = Activitie::where("archived", 0)->get();
+        if($activities){
+            return json_encode($activities);
+        }else{
+            $response = '{"error":"Cette activité n\'existe pas"}';
+            return json_encode($response);
+        }
     }
 
     /**
@@ -128,16 +125,5 @@ class ActivitieController extends Controller
         return redirect()->route('getActivitiesByExam', $request['promotion_id'])->with(['messageError' => "Echec lors de la modification de l'activité"]);
 
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Activitie  $activitie
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Activitie $activitie)
-    {
-        //
     }
 }

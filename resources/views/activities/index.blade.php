@@ -1,4 +1,5 @@
 @extends('layouts.layouts')
+
 @section('title')
 Gestion des examens
 @endsection
@@ -6,6 +7,7 @@ Gestion des examens
 @section('title-section')
 Déroulé de l'examen {{ $exam->label }}
 @endsection
+
 @section('content')
     <form class="d-flex" method="post">
         @csrf
@@ -19,4 +21,5 @@ Déroulé de l'examen {{ $exam->label }}
     <div class="container-fluid">
         @yield('activities')
     </div>
+    <script src="{{ getenv("APP_URL") . '/js/activities.js' }}"></script>
 @endsection

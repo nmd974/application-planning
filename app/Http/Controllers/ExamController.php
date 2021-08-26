@@ -54,7 +54,7 @@ class ExamController extends Controller
         $date = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
         $exam = new Exam();
         $exam->label = $request['label'];
-        $exam->token = Hash::make("".$request['label'].",".$date."");
+        $exam->token = md5("".$request['label'].",".$date."");
         // $exam = new Exam();
         // $exam->label = $request['label'];
         $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
@@ -75,9 +75,12 @@ class ExamController extends Controller
      * @param  \App\Models\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function show(Exam $exam)
+    public function show($id)
     {
         //
+        $exam = Exam::find($id);
+        // dd(json_encode($exam));
+        return json_encode($exam);
     }
 
     /**
@@ -115,7 +118,7 @@ class ExamController extends Controller
         $date = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
         $exam = Exam::find($id);
         $exam->label = $request['label'];
-        $exam->token = Hash::make("".$request['label'].",".$date."");
+        $exam->token = md5("".$request['label'].",".$date."");
         $exam->date_start = date("Y-m-d H:i:s", strtotime($request["start_date"] . " " . $request["start_time"] . ":00"));
 
         if($exam->update()){

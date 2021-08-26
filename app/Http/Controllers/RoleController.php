@@ -58,6 +58,15 @@ class RoleController extends Controller
         }
     }
 
+    public function getAllRoles(){
+        $roles = Role::all();
+        return json_encode($roles);
+    }
+    public function getRole($id){
+        $roles = Role::find($id);
+        return json_encode($roles);
+    }
+
     /**
      * Display the specified resource.
      *

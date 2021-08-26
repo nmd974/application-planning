@@ -39,7 +39,7 @@ Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("use
 
 Route::patch("/eleve/{user_id}/promotion/{promotion_id}/delete", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy");
 
-Route::patch("/exam/update/{id}", [ExamController::class, 'update'])->name("updateExam");
+Route::patch("/exam/{id}/update", [ExamController::class, 'update'])->name("updateExam");
 
 Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index'])->name("getActivitiesByExam");
 Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie");
@@ -53,3 +53,17 @@ Route::get('/role/list', [RoleController::class, 'index'])->name('role.index');
 Route::post('/role/create',[RoleController::class,'store'])->name('role.store');
 Route::patch('/role/update/{id}', [RoleController::class,'update'])->name('role.update');
 Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
+
+//AJAX modal activities
+Route::get('/exam/{exam_id}/activities/{activitie_id}', [ExamActivitieController::class, 'show']);
+Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);
+
+//AJAX modal examens
+Route::get('/exam/{id}', [ExamController::class, 'show']);
+
+//AJAX modal promotion
+Route::get('/promotion/{id}/infos', [PromotionController::class, 'getInfoPromotion']);
+
+//AJEX modal roles
+Route::get('/roles/all', [RoleController::class, 'getAllRoles']);
+Route::get('/role/{id}', [RoleController::class, 'getRole']);

@@ -22,12 +22,12 @@ class ExamFactory extends Factory
      */
     public function definition()
     {
-        $label = $this->faker->word(4, true);
+        $label = "Titre professionnel";
         $date = date("Y-m-d H:i:s", time());
         return [
             'label' => $label,
             'date_start' => $date,
-            'token'     =>  Hash::make("".$label.",".$date.""),
+            'token'     =>  md5("".$label.",".$date.""),
             'archived' => false,
         ];
     }
