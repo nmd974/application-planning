@@ -1,13 +1,13 @@
 @extends('promotions.index')
 @section('promotion')
 @include('promotions.modal.update')
-<div class="row mt-4">
+<div class="row mt-4" id="container">
     @foreach ( $promotions as $promotion)
 
-    <div class="col-xs-12 col-sm-11 col-md-3">
+    <div class="element col-xs-12 col-sm-11 col-md-3">
         <div class="card">
             <div class="card-header">
-                {{ $promotion->label }}
+                <p>{{ $promotion->label }}</p>
             </div>
             <div class="card-body">
                 <a type="button" class="btn btn-outline-secondary"  href="/promotion/{{ $promotion->id }}">

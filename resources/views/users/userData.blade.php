@@ -12,7 +12,7 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="container">
                 @if (count($users))
                     @foreach ($users as $user)
                         @if (!$user->pivot->archived)

@@ -7,12 +7,7 @@ Gestion des promotions
 Gestion des promotions
 @endsection
 @section('content')
-    <form class="d-flex" method="post">
-        @csrf
-        <input class="form-control me-2" type="search" name="search_value" placeholder="Recherche" value="{{ Request::old('search_value') }}">
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
-        <input type="hidden" name="_token" value="{{ Session::token() }}">
-    </form>
+@include('scripts.searchbar')
     @include('promotions.modal.create')
     </div>
 
