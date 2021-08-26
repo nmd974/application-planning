@@ -63,3 +63,7 @@ Route::get('/exam/{id}', [ExamController::class, 'show']);
 
 //AJAX modal promotion
 Route::get('/promotion/{id}/infos', [PromotionController::class, 'getInfoPromotion']);
+
+//AJEX modal roles
+Route::get('/roles/all', [RoleController::class, 'getAllRoles']);
+Route::get('/role/{id}', [RoleController::class, 'getRole']);

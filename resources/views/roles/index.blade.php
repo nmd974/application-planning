@@ -26,5 +26,5 @@ Gestion des rôles
     @yield('roles')
 </div>
 
-
+<script src="{{ getenv("APP_URL") . '/js/roles.js' }}"></script>
 @endsection
