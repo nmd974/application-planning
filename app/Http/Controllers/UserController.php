@@ -20,7 +20,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::All();
+        $roles = Role::All();
+
+        return view('users.add',['users'=>$users,'roles'=>$roles]);
+
     }
 
     /**
@@ -61,6 +65,44 @@ class UserController extends Controller
             }
         }
         return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageError' => "Echec lors de l'ajout de l'élève"]);
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function add(Request $request)
+    {
+        //
+        $validator = Validator::make($request->all(),
+            [
+                'first_name' => 'required|max:255',
+                'last_name'  => 'required|max:255',
+                'email'      => 'required|max:255|email',
+                'birthday'   => 'required|date',
+                'role_id'    =>'required'
+            ]);
+
+        var_dump($request->all());
+
+        if($validator->fails()){
+            return $validator->errors();
+        }
+
+        $user = new User();
+        $user->first_name = $request['first_name'];
+        $user->last_name = $request['last_name'];
+        $user->email = $request['email'];
+        $user->birthday = $request['birthday'];
+        $user->role_id = $request['role_id'];
+        $user->token = Hash::make("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
+        $user->archived = false;
+
+        if($user->save()) {
+            return redirect()->route('user.addForm');
+        }
+
     }
 
     /**

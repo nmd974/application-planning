@@ -13,7 +13,7 @@
         <i class="fa fa-graduation-cap me-3" aria-hidden="true"></i>
         <div>Promotions</div>
       </a>
-      <a href="#"
+      <a href="/user/add"
         class="list-group-item list-group-item-action d-flex align-items-center justify-content-start">
         <i class="fa fa-users me-3" aria-hidden="true"></i>
         <div>Utilisateurs</div>
