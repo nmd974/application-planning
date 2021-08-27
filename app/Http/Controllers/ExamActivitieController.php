@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activitie;
+use App\Http\Controllers\ActivitieController;
 use App\Models\Exam;
 use App\Models\Exam_activitie;
 use Illuminate\Http\Request;
@@ -16,31 +17,21 @@ class ExamActivitieController extends Controller
      */
     public function index($exam_id)
     {
-        //
-        // $exam_activities = Exam_activitie::where("exam_id", $exam_id)->orderBy('order', 'ASC')->get();
-        // dd($exam_activities);
-        // $exam = Exam::find($exam_id);
-        // $activitie = Activitie::find($exam_activities->activitie_id);
-        // return
-        // view("activities.activitiesData")
-        // ->with(['activities' => $exam_activities, 'activitiy' => $activitie, "exam" => $exam]);
-
         $exam_activities = Exam::find($exam_id);
-        // dd($exam_activities->activities);
+        // $exam_activities = Exam_activitie::where(["archived" => 0, "exam_id" => $exam_id])->get();
         $exam = Exam::find($exam_id);
+        $list_activities = Activitie::where("archived", 0)->get();
+        // dd($exam_activities);
+        // $activities = array();
+        // if(!empty($exam_activities)){
+        //    foreach($exam_activities as $e){
+        //        $activities[] = $e->activities;
+        //    }
+        // }
+        // dd($activities);
         return
         view("activities.activitiesData")
-        ->with(['activities' => $exam_activities->activities, "exam" => $exam]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        ->with(['activities' => $exam_activities->activities, "exam" => $exam, 'list_activities' => $list_activities]);
     }
 
     /**
@@ -69,20 +60,19 @@ class ExamActivitieController extends Controller
      * @param  \App\Models\Exam_activitie  $exam_activitie
      * @return \Illuminate\Http\Response
      */
-    public function show(Exam_activitie $exam_activitie)
+    public function show($exam_id,$activitie_id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Exam_activitie  $exam_activitie
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Exam_activitie $exam_activitie)
-    {
-        //
+        $exam_activitie = Exam_activitie::where(["activitie_id" => $activitie_id, "exam_id" => $exam_id])->get()->first();
+        $exam_activitie->activities;
+        $exam_activitie->exams;
+        if($exam_activitie){
+            $response = json_encode($exam_activitie);
+            return $response;
+        }else{
+            $response = array("error" => "Cette activité n'existe pas");
+            return json_encode($response);
+        }
     }
 
     /**
@@ -123,5 +113,11 @@ class ExamActivitieController extends Controller
         }
         return redirect()->route('getActivitiesByExam', $exam_id)->with(['messageError' => "Echec lors de la suppression de l'activité"]);
 
+    }
+
+    public function getExamActivitieExample($id){
+        $response = Exam_activitie::where('activitie_id', $id)->get()->first();
+        $response->activities;
+        return json_encode($response);
     }
 }

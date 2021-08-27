@@ -9,7 +9,7 @@
                 <h5 class="modal-title" id="create_examLabel">Ajouter un examen</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{ route("createExamByPromotion", $promotion_id) }}">
+            <form method="post" action="{{ route("createExamByPromotion", $promotion_id) }}" id="form_create_exam">
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-3">
@@ -19,17 +19,17 @@
                     <div class="form-floating mb-3">
 
                         <input type="date" class="form-control" id="start_date" name="start_date">
-                        <label for="start_date" required>Date</label>
+                        <label for="start_date" required>Date<span class="text-danger">*</span></label>
                     </div>
                     <div class="form-floating mb-3">
 
                         <input type="time" class="form-control" id="start_time" name="start_time">
-                        <label for="start_time" required>Heure de début</label>
+                        <label for="start_time" required>Heure de début<span class="text-danger">*</span></label>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success" name="create">Créer</button>
+                    <button type="submit" class="btn btn-success" name="create" id="create_exam_button">Créer</button>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <input type="hidden" name="promotion_id" value="{{ $promotion_id }}">

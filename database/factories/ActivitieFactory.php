@@ -13,6 +13,7 @@ class ActivitieFactory extends Factory
      * @var string
      */
     protected $model = Activitie::class;
+    public $counter = 1;
 
     /**
      * Define the model's default state.
@@ -21,9 +22,28 @@ class ActivitieFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-            "label" => $this->faker->word(5, true)
-        ];
+        $examen_cda = array(
+            1 => array(
+                "libelle" => "Présentation d'un projet réalisé en amont de la session",
+                "duration" => 40
+            ),
+            2 => array(
+                "libelle" => "Entretien technique & Questionnaire professionnel & Questionnement à partir de production(s)",
+                "duration" => 45
+            ),
+            3 => array(
+                "libelle" => "Entretien final",
+                "duration" => 20
+            )
+        );
+        $data = ['label' => $examen_cda[$this->getCounter()]["libelle"]];
+        $this->setCounter();
+        return $data;
+    }
+    public function getCounter(){
+        return $this->counter;
+    }
+    public function setCounter(){
+        return $this->counter += 1;
     }
 }

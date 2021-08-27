@@ -9,27 +9,32 @@
                 <h5 class="modal-title" id="create_activitieLabel">Ajouter un examen à l'activité {{$exam->label}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{ route("createExamActivitie", $exam->id) }}">
+            <form method="post" id="form_create_activitie" action="{{ route("createExamActivitie", $exam->id) }}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="label" required>
+                        <input autocomplete="false" type="text" list="activities_list" class="form-control" name="label" required>
+                        <datalist id="activities_list">
+                            @foreach ($list_activities as $a)
+                                <option value="{{$a->label}}" data-id="{{$a->id}}">
+                            @endforeach
+                          </datalist>
                         <label>Intitulé<span class="text-danger">*</span></label>
                     </div>
                     <div class="form-floating mb-3">
 
                         <input type="time" class="form-control" id="duration" name="duration">
-                        <label for="duration" required>Durée</label>
+                        <label for="duration" required>Durée*</label>
                     </div>
                     <div class="form-floating mb-3">
 
                         <input type="number" class="form-control" id="order" name="order">
-                        <label for="order" required>Ordre</label>
+                        <label for="order" required>Ordre*</label>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success" name="create">Créer</button>
+                    <button type="submit" class="btn btn-success" name="create" id="create_activitie_button">Créer</button>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <input type="hidden" name="exam_id" value="{{ $exam->id }}">
@@ -38,5 +43,4 @@
         </div>
     </div>
 </div>
-
 

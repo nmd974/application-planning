@@ -40,7 +40,7 @@ class UserController extends Controller
         [
             'first_name' => 'required|max:255',
             'last_name'  => 'required|max:255',
-            'email'      => 'required|max:255|email|unique:table,column,except,id',
+            'email'      => 'required|max:255|email',
             'birthday'   => 'required|date',
         ]);
 
@@ -48,18 +48,23 @@ class UserController extends Controller
             return $validator->errors();
         }
 
-        $user = new User();
-        $user->first_name = $request['first_name'];
-        $user->last_name = $request['last_name'];
-        $user->email = $request['email'];
-        $user->birthday = $request['birthday'];
-        $user->role_id = 1;
-        $user->token = Hash::make("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
-        $user->archived = false;
+        $user = User::where('email', $request['email'])->first();
 
-        if($user->save()){
+        if(!$user) {
+            $user = new User();
+            $user->first_name = $request['first_name'];
+            $user->last_name = $request['last_name'];
+            $user->email = $request['email'];
+            $user->birthday = $request['birthday'];
+            $user->role_id = 1;
+            $user->token = md5("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
+            $user->archived = false;
+            $user = $user->save();
+        }
+
+        if($user){
             $user_promotion = new UserPromotionController();
-            $user_promotion->store($user->id, $request['promotion_id']);
+            $user_promotion = $user_promotion->store($user->id, $request['promotion_id']);
             if($user_promotion){
                 return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Elève ajouté avec succès"]);
             }
@@ -111,9 +116,16 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
         //
+        $user = User::find($id)->first();
+        if($user){
+            return json_encode($user);
+        }else{
+            $response = '{"error":"Cette activité n\'existe pas"}';
+            return json_encode($response);
+        }
     }
 
     /**
@@ -154,7 +166,7 @@ class UserController extends Controller
         $user->last_name = $request['last_name'];
         $user->email = $request['email'];
         $user->birthday = $request['birthday'];
-        $user->token = Hash::make("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
+        $user->token = md5("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
 
         if($user->update()){
             return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Elève modifié avec succès"]);

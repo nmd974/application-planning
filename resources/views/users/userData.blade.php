@@ -12,7 +12,7 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="container">
                 @if (count($users))
                     @foreach ($users as $user)
                         @if (!$user->pivot->archived)
@@ -39,7 +39,7 @@
                 @else
 
                 <tr>
-                    <td class="align-middle" colspan="4">Vous n'avez pas d'élèves enregistrés</td>
+                    <td class="align-middle" colspan="5">Vous n'avez pas d'élèves enregistrés</td>
                 </tr>
                 @endif
             </tbody>

@@ -22,9 +22,9 @@ class Exam_activitie extends Model
     ];
 
     public function activities(){
-        return $this->hasMany(Activitie::class);
+        return $this->belongsTo(Activitie::class, "activitie_id");
     }
     public function exams(){
-        return $this->hasMany(Exam::class);
+        return $this->belongsTo(Exam::class, "exam_id");
     }
 }

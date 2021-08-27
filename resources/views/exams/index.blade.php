@@ -7,15 +7,9 @@ Gestion des promotions
 Gestion de la promotion {{ $label }}
 @endsection
 @section('content')
-    <form class="d-flex" method="post">
-        @csrf
-        <input class="form-control me-2" type="search" name="search_value" placeholder="Recherche" value="{{ Request::old('search_value') }}">
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
-        <input type="hidden" name="_token" value="{{ Session::token() }}">
-    </form>
+@include('scripts.searchbar')
     @include('exams.modal.create')
     </div>
-{{-- {{dd(Route::currentRouteName())}} --}}
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link {{ Route::currentRouteName() == 'usersByPromotion' ? 'active' : '' }}" aria-current="page" href="{{ route("usersByPromotion", $promotion_id) }}">Liste des élèves</a>
@@ -27,4 +21,5 @@ Gestion de la promotion {{ $label }}
     <div class="container-fluid">
         @yield('exams')
     </div>
+    <script src="{{ getenv("APP_URL") . '/js/examen.js' }}"></script>
 @endsection
