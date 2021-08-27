@@ -48,10 +48,9 @@ class PromotionController extends Controller
     public function dataPromotion($id)
     {
         $dataPromotion = Promotion::find($id);
-// dd($dataPromotion->users);
         return
         view("users.userData")
-        ->with(['users' => $dataPromotion->users, 'promotion_id' => $id, "label" => $dataPromotion->label]);
+        ->with(['users' => $dataPromotion->users->where("pivot_archived", 0), 'promotion_id' => $id, "label" => $dataPromotion->label]);
     }
 
     public function dataPromotionExam($id)

@@ -7,8 +7,11 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivitieController;
 use App\Http\Controllers\ExamPromotionController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserPromotionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\QrCodeController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +39,9 @@ Route::patch('/promotion/{promotion_id}/exams/{exam_id}/delete', [ExamPromotionC
 
 Route::post("/eleve/create", [UserController::class, 'store'])->name("users.store");
 Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("users.update");
-
 Route::patch("/eleve/{user_id}/promotion/{promotion_id}/delete", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy");
 
 Route::patch("/exam/{id}/update", [ExamController::class, 'update'])->name("updateExam");
-
 Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index'])->name("getActivitiesByExam");
 Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie");
 Route::patch("/exam/{exam_id}/activities/{activitie_id}/update", [ActivitieController::class, 'update'])->name("updateExamActivitie");
@@ -67,3 +68,16 @@ Route::get('/promotion/{id}/infos', [PromotionController::class, 'getInfoPromoti
 //AJEX modal roles
 Route::get('/roles/all', [RoleController::class, 'getAllRoles']);
 Route::get('/role/{id}', [RoleController::class, 'getRole']);
+
+//AJAX users
+// Route::get('/users/all', [UserController::class, 'getAllUsers']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+
+//SendMail
+Route::get('/contact/students/promotion/{id}',[MailController::class, 'sendMailforStudents']);
+Route::get('/contact/student/{user_id}',[MailController::class, 'sendMailByStudent']);
+Route::get('/contact/jury/promotion/{id}',[MailController::class, 'sendMailForJuryByPromo']);
+Route::get('/contact/jury/{jury_id}/promotion/{id}',[MailController::class, 'sendMailByJury']);
+
+//QRCODE Generator
+Route::get('/generate-qrcode/test', [QrCodeController::class, 'index']);

@@ -54,11 +54,15 @@ class UserController extends Controller
             $user->birthday = $request['birthday'];
             $user->role_id = 1;
             $user->token = md5("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
-            $user->archived = false;
-            $user = $user->save();
-        }
-
-        if($user){
+            ;
+            if($user->save()){
+                $user_promotion = new UserPromotionController();
+                $user_promotion = $user_promotion->store($user->id, $request['promotion_id']);
+                if($user_promotion){
+                    return redirect()->route('usersByPromotion', $request['promotion_id'])->with(['messageSuccess' => "Elève ajouté avec succès"]);
+                }
+            }
+        }else{
             $user_promotion = new UserPromotionController();
             $user_promotion = $user_promotion->store($user->id, $request['promotion_id']);
             if($user_promotion){
@@ -77,11 +81,11 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        $user = User::find($id)->first();
+        $user = User::find($id);
         if($user){
             return json_encode($user);
         }else{
-            $response = '{"error":"Cette activité n\'existe pas"}';
+            $response = '{"error":"Cet utilisateur n\'existe pas"}';
             return json_encode($response);
         }
     }
@@ -149,4 +153,5 @@ class UserController extends Controller
         // }
         // return redirect()->route('users.index')->with(['messageError' => "Echec lors de la suppression de l'utilisateur"]);
     }
+
 }

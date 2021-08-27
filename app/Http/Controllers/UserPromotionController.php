@@ -92,7 +92,7 @@ class UserPromotionController extends Controller
      * @param  \App\Models\User_promotion  $user_promotion
      * @return \Illuminate\Http\Response
      */
-    public function destroy($promotion_id,$user_id)
+    public function destroy($user_id, $promotion_id)
     {
 
         $user_promotion = User_promotion::where(["user_id" => $user_id, "promotion_id" => $promotion_id])->get()->first();
