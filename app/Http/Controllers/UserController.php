@@ -163,6 +163,42 @@ class UserController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updateRole(Request $request, $id)
+    {
+        //
+        $validator = Validator::make($request->all(),
+            [
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|max:255',
+                'email' => 'required|max:255|email',
+                'birthday' => 'required|date',
+            ]);
+
+        if($validator->fails()){
+            return $validator->errors();
+        }
+
+        $user = User::find($id);
+        $user->first_name = $request['first_name'];
+        $user->last_name = $request['last_name'];
+        $user->email = $request['email'];
+        $user->birthday = $request['birthday'];
+        $user->token = Hash::make("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
+        $user->role_id = $request['role_id'];
+
+        if($user->update()){
+            return redirect('/user/add');
+        }
+        return redirect('/user/add');
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user

@@ -58,3 +58,4 @@ Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('ro
 Route::get('/user/add', [UserController::class,'create'])->name('user.addForm');
 Route::post('/user/add',[UserController::class,'add'])->name('user.add');
 Route::delete('/user/delete/{id}', [UserController::class, 'deleted'])->name('user.deleted');
+Route::patch('/user/edit/{id}', [UserController::class,'updateRole'])->name('user.edit');

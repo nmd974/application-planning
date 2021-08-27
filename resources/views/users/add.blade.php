@@ -23,6 +23,7 @@
                 <tbody>
                 @if (count($users))
                     @foreach ($users as $user)
+                        @include('users.modal.edit')
                         @include('users.modal.deleted')
 
                <tr>
