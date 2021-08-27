@@ -9,7 +9,7 @@
                 <h5 class="modal-title" id="create_eleveLabel">Ajouter un utilisateur</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{ route("user.add") }}">
+            <form method="post" action="{{ route("user.addForm") }}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-3">
