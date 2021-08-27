@@ -15,8 +15,7 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                {{-- {{dd($users)}} --}}
+            <tbody id="container">
                 @if (count($users))
                     @forelse ($users as $user)
                         @if (!$user->pivot->archived)

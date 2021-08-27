@@ -14,7 +14,7 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="container">
                 @if (count($promotion->exams))
 
                     @foreach ($promotion->exams as $exam)
