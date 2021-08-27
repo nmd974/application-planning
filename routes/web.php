@@ -39,7 +39,7 @@ Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("use
 
 Route::patch("/eleve/{user_id}/promotion/{promotion_id}/delete", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy");
 
-Route::patch("/exam/update/{id}", [ExamController::class, 'update'])->name("updateExam");
+Route::patch("/exam/{id}/update", [ExamController::class, 'update'])->name("updateExam");
 
 Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index'])->name("getActivitiesByExam");
 Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie");
@@ -48,14 +48,22 @@ Route::patch("/exam/{exam_id}/activities/{activitie_id}/delete", [ExamActivitieC
 
 
 //CRUD roles
+
 Route::get('/role/list', [RoleController::class, 'index'])->name('role.index');
 Route::post('/role/create',[RoleController::class,'store'])->name('role.store');
 Route::patch('/role/update/{id}', [RoleController::class,'update'])->name('role.update');
 Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
 
-//users
+//AJAX modal activities
+Route::get('/exam/{exam_id}/activities/{activitie_id}', [ExamActivitieController::class, 'show']);
+Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);
 
-Route::get('/user/add', [UserController::class,'create'])->name('user.addForm');
-Route::post('/user/add',[UserController::class,'add'])->name('user.add');
-Route::delete('/user/delete/{id}', [UserController::class, 'deleted'])->name('user.deleted');
-Route::patch('/user/edit/{id}', [UserController::class,'updateRole'])->name('user.edit');
+//AJAX modal examens
+Route::get('/exam/{id}', [ExamController::class, 'show']);
+
+//AJAX modal promotion
+Route::get('/promotion/{id}/infos', [PromotionController::class, 'getInfoPromotion']);
+
+//AJAX modal roles
+Route::get('/roles/all', [RoleController::class, 'getAllRoles']);
+Route::get('/role/{id}', [RoleController::class, 'getRole']);
