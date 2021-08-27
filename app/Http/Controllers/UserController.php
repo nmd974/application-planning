@@ -100,9 +100,9 @@ class UserController extends Controller
         $user->archived = false;
 
         if($user->save()) {
-            return redirect()->route('user.addForm');
+            return redirect()->route('user.addForm')->with(['messageSuccess' => "Utilisateur ajouté avec succès"]);
         }
-
+        return redirect()->route('user.addForm')->with(['messageError' => "Echec lors de l'ajout de l'utilisateur"]);
     }
 
     /**
@@ -193,9 +193,9 @@ class UserController extends Controller
         $user->role_id = $request['role_id'];
 
         if($user->update()){
-            return redirect('/user/add');
+            return redirect('/user/add')->with(['messageSuccess' => "Utilisateur édité avec succès"]);
         }
-        return redirect('/user/add');
+        return redirect('/user/add')->with(['messageError' => "Echec lors de l'édition de l'utilisateur"]);
     }
 
     /**
@@ -228,7 +228,8 @@ class UserController extends Controller
     public function deleted ($id){
         $user = User::find($id);
         if($user->delete()){
-            return redirect('/');
+            return redirect('/user/add')->with(['messageSuccess' => "Utilisateur supprimé avec succès"]);
         }
+        return redirect('/user/add')->with(['messageError' => "Echec lors de la suppression de l'utilisateur"]);
     }
 }
