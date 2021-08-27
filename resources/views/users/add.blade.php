@@ -23,6 +23,7 @@
                 <tbody>
                 @if (count($users))
                     @foreach ($users as $user)
+                        @include('users.modal.deleted')
 
                <tr>
                                 <td class="align-middle">{{ucfirst($user->first_name) }} {{ucfirst($user->last_name) }}</td>

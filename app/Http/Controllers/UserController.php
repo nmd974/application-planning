@@ -178,5 +178,21 @@ class UserController extends Controller
         //     return redirect()->route('users.index')->with(['messageSuccess' => "Utilisateur supprimé avec succès"]);
         // }
         // return redirect()->route('users.index')->with(['messageError' => "Echec lors de la suppression de l'utilisateur"]);
+
+
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function deleted ($id){
+        $user = User::find($id);
+        if($user->delete()){
+            return redirect('/');
+        }
     }
 }
