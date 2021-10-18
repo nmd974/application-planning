@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -63,11 +64,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $request["email"] = Str::lower($request["email"]);
         $validator = Validator::make($request->all(),
         [
             'first_name' => 'required|max:255',
             'last_name'  => 'required|max:255',
-            'email'      => 'required|max:255|email',
+            'email'      => 'required|max:255|email|unique',
             'birthday'   => 'required|date',
         ]);
 
@@ -79,8 +81,8 @@ class UserController extends Controller
 
         if(!$user) {
             $user = new User();
-            $user->first_name = $request['first_name'];
-            $user->last_name = $request['last_name'];
+            $user->first_name = Str::lower($request['first_name']);
+            $user->last_name = Str::lower($request['last_name']);
             $user->email = $request['email'];
             $user->birthday = $request['birthday'];
             $user->role_id = 1;
@@ -111,6 +113,7 @@ class UserController extends Controller
     public function add(Request $request)
     {
         //
+        $request["email"] = Str::lower($request["email"]);
         $validator = Validator::make($request->all(),
             [
                 'first_name' => 'required|max:255',
@@ -127,9 +130,9 @@ class UserController extends Controller
         }
 
         $user = new User();
-        $user->first_name = $request['first_name'];
-        $user->last_name = $request['last_name'];
-        $user->email = $request['email'];
+        $user->first_name = Str::lower($request['first_name']);
+        $user->last_name = Str::lower($request['last_name']);
+        $user->email = Str::lower($request['email']);
         $user->birthday = $request['birthday'];
         $user->role_id = $request['role_id'];
         $user->token = Hash::make("".$request['first_name'].",".$request['last_name'].",".$request['birthday']."");
