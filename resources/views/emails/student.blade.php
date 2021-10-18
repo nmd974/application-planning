@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/> --}}
 </head>
 
 <body>
@@ -39,6 +39,11 @@
                 {{-- {{dd(base64_encode($qr_code))}} --}}
                 {{-- <p>{{$message}}</p> --}}
                 {{-- <img src="{!!QrCode::format('png')->generate(getenv("APP_FRONT_URL")}}/planning/eleve/{{$token!!}"> --}}
+
+
+                <p>{{$qr_code}}</p>
+                <p>{{ QrCode::size(100)->generate(getenv("APP_FRONT_URL")."/planning/eleve/".$token) }}</p>
+
             </div>
         </div>
     </div>

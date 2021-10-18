@@ -28,14 +28,16 @@ class MailController extends Controller {
         // $renderer->setWidth(256);
         // $writer = new \BaconQrCode\Writer($renderer);
         // $writer->writeFile('Hello World!', 'qrcode.png');
-        $qr_code = QrCode::size(300)->generate(getenv("APP_FRONT_URL")."/planning/eleve/".$token);
+        $qr_code = QrCode::size(200)->generate(getenv("APP_FRONT_URL")."/planning/eleve/".$token);
         $data = [
             "token" => $token,
-            "qr_code" => base64_encode($qr_code)
+            "qr_code" => $qr_code
         ];
+        // dd(base64_encode($qr_code));
         // dd($data);
         Mail::to('jha.payet@gmail.com')->send(new Email($data, "student"));
         return back();
    }
 
 }
+// <img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate(getenv("APP_FRONT_URL")."/planning/eleve/".$token)) }} ">

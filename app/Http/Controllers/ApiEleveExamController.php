@@ -69,7 +69,7 @@ class ApiEleveExamController extends Controller
             }else{
                 return [
                     "error"   => true,
-                    "message" => "l'examan n'existe plus"
+                    "message" => "l'examen n'existe plus"
                 ];
             };
         }

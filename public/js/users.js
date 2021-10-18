@@ -156,6 +156,7 @@ btn_send.forEach(element => {
         };
         xhr.onerror = function(){
             alert("La requête a échoué");
+            console.log(xhr);
         };
     })
 })
