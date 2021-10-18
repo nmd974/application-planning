@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Role::factory(1)->create([
             "label" => "Jury"
         ]);
-        \App\Models\Role::factory(2)->create();
+        // \App\Models\Role::factory(2)->create();
         \App\Models\User::factory(10)->create();
         \App\Models\Promotion::factory(1)->create();
         \App\Models\User_promotion::factory(10)->create();

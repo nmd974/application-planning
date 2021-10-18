@@ -1,16 +1,3 @@
-$(document).ready(function (){
-    $("#sidebar-toggle").click(function (e) {
-        $("#wrapper").toggleClass("toggled");
-        $("#starting-page").toggleClass("toggled");
-        $('#sidebar-toggle').toggleClass('fa-close');
-        $('#sidebar-toggle').toggleClass('fa-bars');
-    });
-    $('html').css('overflow-y', 'scroll');
-    $('#loader_wrapper').remove();
-})
-var toast = new bootstrap.Toast(document.getElementById('liveToast'))
-toast.show();
-
 //******************************************************************* */
 //REGLES COMMUNES VALIDATOR
 //******************************************************************* */
@@ -132,3 +119,15 @@ function searchBar() {
         }
     }
 }
+$(document).ready(function (){
+    $("#sidebar-toggle").click(function (e) {
+        $("#wrapper").toggleClass("toggled");
+        $("#starting-page").toggleClass("toggled");
+        $('#sidebar-toggle').toggleClass('fa-close');
+        $('#sidebar-toggle').toggleClass('fa-bars');
+    });
+    $('html').css('overflow-y', 'scroll');
+    $('#loader_wrapper').remove();
+})
+var toast = new bootstrap.Toast(document.getElementById('liveToast'))
+toast.show();

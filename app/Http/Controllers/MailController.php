@@ -27,8 +27,32 @@ class MailController extends Controller {
             "token" => $token,
             "message" => ""
         ];
-        Mail::to('jha.payet@gmail.com')->send(new Email($data, "student"));
-        return back();
+        $data_mail = explode("@", $user->email);
+        $data_mail_two = explode(".", $data_mail);
+        if($data_mail_two[0] == "example"){
+            $mail = "jha.payet@gmail.com";
+        }else{
+            $mail = $user->email;
+        }
+        Mail::to($mail)->send(new Email($data, "student"));
+        return back()->with(["messageSuccess" => "Email envoyé avec succès !"]);
+   }
+   public function sendMailByJury($user_id) {
+        $user = User::find($user_id);
+        $token = $user->token;
+        $data = [
+            "token" => $token,
+            "message" => ""
+        ];
+        $data_mail = explode("@", $user->email);
+        $data_mail_two = explode(".", $data_mail);
+        if($data_mail_two[0] == "example"){
+            $mail = "jha.payet@gmail.com";
+        }else{
+            $mail = $user->email;
+        }
+        Mail::to($mail)->send(new Email($data, "jury"));
+        return back()->with(["messageSuccess" => "Email envoyé avec succès !"]);
    }
 
 }
