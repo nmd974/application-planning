@@ -120,7 +120,7 @@ class UserController extends Controller
                 'role_id'    =>'required'
             ]);
 
-        var_dump($request->all());
+        // var_dump($request->all());
 
         if($validator->fails()){
             return $validator->errors();
