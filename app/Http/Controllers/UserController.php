@@ -4,15 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\User_promotion;
 use App\Http\Controllers\UserPromotionController;
-use App\Http\Controllers\PromotionController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(),
+        [
+            'password'  => 'required|max:255',
+            'email'      => 'required|max:255|email',
+        ]);
+
+        if($validator->fails()){
+            return $validator->errors();
+        }
+
+        $user = User::where('email', $request['email'])->first();
+        // dd($user->role->id);
+        if($user->role->id == 3 && Auth::attempt(['email' => $request['email'],'password' => $request['password']])){
+            return redirect()->route('Accueil')->with(['messageSuccess' => "Connexion réussie"]);
+        }
+        return redirect()->route('login')->with(['messageError' => "Echec lors de la connexion"]);
+    }
+
+    public function logout()
+    {
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('login')->with(['messageSuccess' => "A bientôt :)"]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

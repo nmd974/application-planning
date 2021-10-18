@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->boolean('archived')->default(false);
             $table->foreignId('role_id')->constrained()->cascadeOnDelete();
             $table->string('email')->unique();
+            $table->string('password')->default("1234");
             $table->timestamps();
         });
     }

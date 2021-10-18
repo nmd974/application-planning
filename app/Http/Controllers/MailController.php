@@ -23,18 +23,10 @@ class MailController extends Controller {
    public function sendMailByStudent($user_id) {
         $user = User::find($user_id);
         $token = $user->token;
-        // $renderer = new \BaconQrCode\Renderer\Image\Png();
-        // $renderer->setHeight(256);
-        // $renderer->setWidth(256);
-        // $writer = new \BaconQrCode\Writer($renderer);
-        // $writer->writeFile('Hello World!', 'qrcode.png');
-        $qr_code = QrCode::size(200)->generate(getenv("APP_FRONT_URL")."/planning/eleve/".$token);
         $data = [
             "token" => $token,
-            "qr_code" => $qr_code
+            "message" => ""
         ];
-        // dd(base64_encode($qr_code));
-        // dd($data);
         Mail::to('jha.payet@gmail.com')->send(new Email($data, "student"));
         return back();
    }

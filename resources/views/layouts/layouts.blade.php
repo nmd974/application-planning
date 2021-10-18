@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://use.fontawesome.com/c18e5332f2.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ getenv("APP_URL") . '/css/app.css' }}">
     <title>@yield('title')</title>
     <script>
@@ -32,10 +31,11 @@
                         @yield('title-section')
                     </h2>
                 </div>
+                @if (Auth::check())
                 <a role="button" class="btn btn-success me-md-5" href="{{ URL::previous() }}">
                     <i class="fa fa-arrow-left me-md-3" aria-hidden="true"></i>Retour
                 </a>
-
+                @endif
             </div>
             <div class="bloc-content">
                 <div class="content-bloc shadow-lg p-md-5 p-1 h-100 d-flex flex-column">
@@ -49,6 +49,7 @@
     </div>
 </div>
 <script src="{{ getenv("APP_URL") . '/js/share.js' }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function (){
         $("#sidebar-toggle").click(function (e) {
@@ -66,7 +67,7 @@
 <!-- Fonction de recherche -->
 <script>
     function searchBar() {
-        
+
         // Déclaration des variables et récupération des balises
         var input, filter, ul, li, a, i, txtValue;
         input = document.getElementById('searchbar');

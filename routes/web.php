@@ -11,7 +11,9 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserPromotionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Middleware\Authenticate;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,67 +26,79 @@ use App\Models\User;
 |
 */
 
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/login', function () {
+        return view('auth.login');
+    })->name('login');
 
-Route::get('/', [PromotionController::class, 'index']);
-Route::get('/{vue}', [PromotionController::class, 'index'])->name("getPromotions");
+    Route::post('/login/check', [UserController::class, 'login'])->name("loginCheck");
+    Route::get('/logout', [UserController::class, 'logout'])->name("logout");
 
-Route::get("/promotion/{id}", [PromotionController::class, 'dataPromotion'])->name("usersByPromotion");
-Route::post('/promotion/create', [PromotionController::class, 'store'])->name("promotion.store");
-Route::get('/promotion/archived/{id}', [PromotionController::class, 'destroy']);
-Route::get('/promotion/{id}/exams', [PromotionController::class, 'dataPromotionExam'])->name("examsByPromotion");
+    Route::get('/', [PromotionController::class, 'index'])->name("Accueil")->middleware("auth");
+    Route::get('/{vue}', [PromotionController::class, 'index'])->name("getPromotions")->middleware("auth");
 
-route::patch('/promotion/{id}/update', [PromotionController::class, 'update'])->name('updatePromotion');
-Route::post('/promotion/{id}/exams/create', [ExamController::class, 'store'])->name("createExamByPromotion");
-Route::patch('/promotion/{promotion_id}/exams/{exam_id}/delete', [ExamPromotionController::class, 'destroy'])->name("deleteExamByPromotion");
+    Route::get("/promotion/{id}", [PromotionController::class, 'dataPromotion'])->name("usersByPromotion")->middleware("auth");
+    Route::post('/promotion/create', [PromotionController::class, 'store'])->name("promotion.store")->middleware("auth");
+    Route::get('/promotion/archived/{id}', [PromotionController::class, 'destroy'])->middleware("auth");
+    Route::get('/promotion/{id}/exams', [PromotionController::class, 'dataPromotionExam'])->name("examsByPromotion")->middleware("auth");
 
-Route::post("/eleve/create", [UserController::class, 'store'])->name("users.store");
-Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("users.update");
-Route::patch("/eleve/{user_id}/promotion/{promotion_id}/delete", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy");
+    route::patch('/promotion/{id}/update', [PromotionController::class, 'update'])->name('updatePromotion')->middleware("auth");
+    Route::post('/promotion/{id}/exams/create', [ExamController::class, 'store'])->name("createExamByPromotion")->middleware("auth");
+    Route::patch('/promotion/{promotion_id}/exams/{exam_id}/delete', [ExamPromotionController::class, 'destroy'])->name("deleteExamByPromotion")->middleware("auth");
 
-Route::patch("/exam/{id}/update", [ExamController::class, 'update'])->name("updateExam");
-Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index'])->name("getActivitiesByExam");
-Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie");
-Route::patch("/exam/{exam_id}/activities/{activitie_id}/update", [ActivitieController::class, 'update'])->name("updateExamActivitie");
-Route::patch("/exam/{exam_id}/activities/{activitie_id}/delete", [ExamActivitieController::class, 'destroy'])->name("deleteActivityByExam");
+    Route::post("/eleve/create", [UserController::class, 'store'])->name("users.store")->middleware("auth");
+    Route::patch("/eleve/update/{id}", [UserController::class, 'update'])->name("users.update")->middleware("auth");
+    Route::patch("/eleve/{user_id}/promotion/{promotion_id}/delete", [UserPromotionController::class, 'destroy'])->name("user_promotions.destroy")->middleware("auth");
+
+    Route::patch("/exam/{id}/update", [ExamController::class, 'update'])->name("updateExam")->middleware("auth");
+    Route::get("/exam/{exam_id}/activities", [ExamActivitieController::class, 'index'])->name("getActivitiesByExam")->middleware("auth");
+    Route::post("/exam/{exam_id}/activities/create", [ActivitieController::class, 'store'])->name("createExamActivitie")->middleware("auth");
+    Route::patch("/exam/{exam_id}/activities/{activitie_id}/update", [ActivitieController::class, 'update'])->name("updateExamActivitie")->middleware("auth");
+    Route::patch("/exam/{exam_id}/activities/{activitie_id}/delete", [ExamActivitieController::class, 'destroy'])->name("deleteActivityByExam")->middleware("auth");
 
 
-//CRUD roles
+    //CRUD roles
 
-Route::get('/role/list', [RoleController::class, 'index'])->name('role.index');
-Route::post('/role/create',[RoleController::class,'store'])->name('role.store');
-Route::patch('/role/update/{id}', [RoleController::class,'update'])->name('role.update');
-Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
+    Route::get('/role/list', [RoleController::class, 'index'])->name('role.index')->middleware("auth");
+    Route::post('/role/create',[RoleController::class,'store'])->name('role.store')->middleware("auth");
+    Route::patch('/role/update/{id}', [RoleController::class,'update'])->name('role.update')->middleware("auth");
+    Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('role.destroy')->middleware("auth");
 
-// CRUD USER
+    // CRUD USER
 
-Route::get('/user/add', [UserController::class,'create']);
-Route::post('/user/add', [UserController::class, 'add'])->name('user.addForm');
-Route::patch('/user/edit/{id}',[UserController::class, 'updateRole'])->name('user.edit');
-Route::delete('/user/delete/{id}', [UserController::class,'deleted'])->name('user.deleted');
+    Route::get('/user/add', [UserController::class,'create'])->middleware("auth");
+    Route::post('/user/add', [UserController::class, 'add'])->name('user.addForm')->middleware("auth");
+    Route::patch('/user/edit/{id}',[UserController::class, 'updateRole'])->name('user.edit')->middleware("auth");
+    Route::delete('/user/delete/{id}', [UserController::class,'deleted'])->name('user.deleted')->middleware("auth");
 
-//AJAX modal activities
-Route::get('/exam/{exam_id}/activities/{activitie_id}', [ExamActivitieController::class, 'show']);
-Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActivitieExample']);
+    //AJAX modal activities
+    Route::get('/exam/{exam_id}/activities/{activitie_id}', [ExamActivitieController::class, 'show'])->middleware("auth");
+    Route::get('/activities/{id}', [ExamActivitieController::class, 'getExamActivitieExample'])->middleware("auth");
 
-//AJAX modal examens
-Route::get('/exam/{id}', [ExamController::class, 'show']);
+    //AJAX modal examens
+    Route::get('/exam/{id}', [ExamController::class, 'show'])->middleware("auth");
 
-//AJAX modal promotion
-Route::get('/promotion/{id}/infos', [PromotionController::class, 'getInfoPromotion']);
+    //AJAX modal promotion
+    Route::get('/promotion/{id}/infos', [PromotionController::class, 'getInfoPromotion'])->middleware("auth");
 
-//AJAX modal roles
-Route::get('/roles/all', [RoleController::class, 'getAllRoles']);
-Route::get('/role/{id}', [RoleController::class, 'getRole']);
+    //AJAX modal roles
+    Route::get('/roles/all', [RoleController::class, 'getAllRoles'])->middleware("auth");
+    Route::get('/role/{id}', [RoleController::class, 'getRole'])->middleware("auth");
 
-//AJAX users
-// Route::get('/users/all', [UserController::class, 'getAllUsers']);
-Route::get('/user/{id}', [UserController::class, 'show']);
+    //AJAX users
+    // Route::get('/users/all', [UserController::class, 'getAllUsers']);
+    Route::get('/user/{id}', [UserController::class, 'show'])->middleware("auth");
 
-//SendMail
-Route::get('/contact/students/promotion/{id}',[MailController::class, 'sendMailforStudents']);
-Route::get('/contact/student/{user_id}',[MailController::class, 'sendMailByStudent']);
-Route::get('/contact/jury/promotion/{id}',[MailController::class, 'sendMailForJuryByPromo']);
-Route::get('/contact/jury/{jury_id}/promotion/{id}',[MailController::class, 'sendMailByJury']);
+    //SendMail
+    Route::get('/contact/students/promotion/{id}',[MailController::class, 'sendMailforStudents'])->middleware("auth");
+    Route::get('/contact/student/{user_id}',[MailController::class, 'sendMailByStudent'])->middleware("auth");
+    Route::get('/contact/jury/promotion/{id}',[MailController::class, 'sendMailForJuryByPromo'])->middleware("auth");
+    Route::get('/contact/jury/{jury_id}/promotion/{id}',[MailController::class, 'sendMailByJury'])->middleware("auth");
 
-//QRCODE Generator
-Route::get('/generate-qrcode/test', [QrCodeController::class, 'index']);
+    //QRCODE Generator
+    Route::get('/generate-qrcode/test', [QrCodeController::class, 'index'])->middleware("auth");
+
+});
+
+
+

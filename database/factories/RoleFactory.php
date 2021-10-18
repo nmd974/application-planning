@@ -23,7 +23,7 @@ class RoleFactory extends Factory
      */
     public function definition()
     {
-        $roles = ['élève', 'jury', 'admin'];
+        $roles = ['Elève', 'Jury', 'Admin'];
         $data = ['label' => $roles[$this->getCounter()]];
         $this->setCounter();
         return $data;

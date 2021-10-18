@@ -22,5 +22,12 @@ class DatabaseSeeder extends Seeder
         \App\Models\Exam::factory(1)->create();
         \App\Models\Exam_activitie::factory(3)->create();
         \App\Models\Exam_promotion::factory(1)->create();
+        \App\Models\User::factory(1)->create([
+            'first_name' => "Admin",
+            'last_name' => "Admin",
+            'email' => "admin@admin.com",
+            'role_id' => 3,
+            "password" => bcrypt("admin")
+        ]);
     }
 }
