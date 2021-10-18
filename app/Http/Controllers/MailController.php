@@ -25,10 +25,11 @@ class MailController extends Controller {
         $token = $user->token;
         $data = [
             "token" => $token,
-            "message" => ""
+            "message" => "",
+            "name" => ucfirst($user->first_name),
         ];
         $data_mail = explode("@", $user->email);
-        $data_mail_two = explode(".", $data_mail);
+        $data_mail_two = explode(".", $data_mail[1]);
         if($data_mail_two[0] == "example"){
             $mail = "jha.payet@gmail.com";
         }else{
@@ -42,10 +43,11 @@ class MailController extends Controller {
         $token = $user->token;
         $data = [
             "token" => $token,
-            "message" => ""
+            "message" => "",
+            "name" => ucfirst($user->first_name),
         ];
         $data_mail = explode("@", $user->email);
-        $data_mail_two = explode(".", $data_mail);
+        $data_mail_two = explode(".", $data_mail[1]);
         if($data_mail_two[0] == "example"){
             $mail = "jha.payet@gmail.com";
         }else{

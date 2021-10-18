@@ -28,12 +28,12 @@ class Email extends Mailable
             return $this->view('emails.student')
             ->from($address)
             ->subject($subject)
-            ->with([ 'token' => $this->data["token"], 'qr_code' => $this->data["qr_code"] ]);
+            ->with([ 'token' => $this->data["token"], 'name' => $this->data["name"] ]);
         }else{
             return $this->view('emails.jury')
             ->from($address)
             ->subject($subject)
-            ->with([ 'token' => $this->data ]);
+            ->with([ 'token' => $this->data, 'name' => $this->data["name"] ]);
         }
 
     }

@@ -12,8 +12,8 @@
         <tr><td>Ce mail vous est envoyé depuis la plateforme de gestion des activités de Simplon.</td></tr>
         <tr>
             <td>En cliquant sur ce lien, vous accéderez au contenu de vos activités :</td>
-            <td><a href="{{getenv("APP_FRONT_URL")}}/planning/eleve/{{$token}}" target="_blank">lien d'accès à la plateforme web</a></td>
         </tr>
+        <tr>            <td><a href="{{getenv("APP_FRONT_URL")}}/planning/eleve/{{$token}}" target="_blank">lien d'accès à la plateforme web</a></td></tr>
         <tr>
             <td>Ou scannez directement ce QRCODE :</td>
         </tr>
