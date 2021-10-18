@@ -23,15 +23,18 @@ class RoleFactory extends Factory
      */
     public function definition()
     {
-        $roles = ['Elève', 'Jury', 'Admin'];
-        $data = ['label' => $roles[$this->getCounter()]];
-        $this->setCounter();
-        return $data;
+        return [
+            'label' => "",
+        ];
+        // $roles = ['Elève', 'Jury'];
+        // $data = ['label' => $roles[$this->getCounter()]];
+        // $this->setCounter();
+        // return $data;
     }
-    public function getCounter(){
-        return $this->counter;
-    }
-    public function setCounter(){
-        return $this->counter += 1;
-    }
+    // public function getCounter(){
+    //     return $this->counter;
+    // }
+    // public function setCounter(){
+    //     return $this->counter += 1;
+    // }
 }
