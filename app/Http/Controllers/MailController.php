@@ -36,8 +36,9 @@ class MailController extends Controller {
         }else{
             $mail = $user->email;
         }
-
-        Mail::to($mail)->send(new Email($data, "student"));
+        $content = new Email($data, "student");
+        dd($content);
+        Mail::to($mail)->send($content);
         dd($user);
         return back()->with(["messageSuccess" => "Email envoyé avec succès !"]);
    }
