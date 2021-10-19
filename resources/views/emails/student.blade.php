@@ -20,7 +20,7 @@
         <tr></tr>
         <tr></tr>
         <tr>
-            <td><img src="{!!$message->embedData(QrCode::format('png')->generate(getenv("APP_FRONT_URL")."/planning/eleve/".$token), 'QrCode.png', 'image/png')!!}"></td>
+            {{-- <td><img src="{!!$message->embedData(QrCode::format('png')->generate(getenv("APP_FRONT_URL")."/planning/eleve/".$token), 'QrCode.png', 'image/png')!!}"></td> --}}
         </tr>
     </table>
 </body>

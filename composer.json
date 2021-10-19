@@ -14,8 +14,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "orbitale/imagemagick-php": "^3.2",
-        "simplesoftwareio/simple-qrcode": "^4.2",
-        "ext-imagick": "*"
+        "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
