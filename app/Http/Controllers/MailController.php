@@ -22,7 +22,7 @@ class MailController extends Controller {
    }
    public function sendMailByStudent($user_id) {
         $user = User::find($user_id);
-        dd($user);
+
         $token = $user->token;
         $data = [
             "token" => $token,
@@ -36,6 +36,7 @@ class MailController extends Controller {
         }else{
             $mail = $user->email;
         }
+        dd($user);
         Mail::to($mail)->send(new Email($data, "student"));
         return back()->with(["messageSuccess" => "Email envoyé avec succès !"]);
    }
