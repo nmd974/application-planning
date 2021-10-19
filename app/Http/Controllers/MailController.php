@@ -22,6 +22,7 @@ class MailController extends Controller {
    }
    public function sendMailByStudent($user_id) {
         $user = User::find($user_id);
+        dd($user);
         $token = $user->token;
         $data = [
             "token" => $token,
