@@ -36,10 +36,8 @@ class MailController extends Controller {
         }else{
             $mail = $user->email;
         }
-        $content = new Email($data, "student");
-        dd($content);
-        Mail::to($mail)->send($content);
-        dd($user);
+
+        Mail::to($mail)->queue(new Email($data, "student"));
         return back()->with(["messageSuccess" => "Email envoyé avec succès !"]);
    }
    public function sendMailByJury($user_id) {
