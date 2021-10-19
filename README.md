@@ -8,13 +8,15 @@ L'application sera à l'usage de personnes qui disposent de plannings communs ou
 
 En tant que|Je veux|Afin de|Taches|Priorite
 :---|:---|:---|:---|:---
-Utilisateur|Créer, modifier, desactiver une activité|Gérer les activités possibles|Modele de la table Activite
+Administrateur|Créer, modifier, desactiver une activité|Gérer les activités possibles|Modele de la table Activite
 ||||CRUD sur la table
 ||||Sécuriser le formulaire
-Utilisateur|Créer, modifier, desactiver un utilisateur|Gérer les utilsateurs|Modele de la table utilisateur
+Administrateur|Créer, modifier, desactiver un utilisateur|Gérer les utilsateurs|Modele de la table utilisateur
 ||||CRUD sur la table
 ||||Sécuriser le formulaire
-Utilisateur|Affecter une activité à une personne|Visualiser les activités sur une date|Fonction d'ajout de l'id de l'activité à une heure et date
+Administrateur|Affecter une activité à une personne|Visualiser les activités sur une date|Fonction d'ajout de l'id de l'activité à une heure et date
+Administrateur|Affecter une activité à un groupe d'activité|Gérer plusieurs sous activités|Fonction d'ajout de l'id de l'activité à un groupe d'activité
+Utilisateur|Consulter mes activités à venir|Gérer mon emploi du temps|Mise en place l'api
 
 # TASKS
 
