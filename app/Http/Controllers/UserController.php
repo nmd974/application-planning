@@ -69,7 +69,7 @@ class UserController extends Controller
         [
             'first_name' => 'required|max:255',
             'last_name'  => 'required|max:255',
-            'email'      => 'required|max:255|email|unique',
+            'email'      => 'required|max:255|email',
             'birthday'   => 'required|date',
         ]);
 
